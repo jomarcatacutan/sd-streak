@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 import { NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
@@ -42,9 +43,16 @@ export class DashboardComponent implements OnInit {
    */
   currentDate: NgbDateStruct;
 
-  constructor(private calendar: NgbCalendar) {}
+  constructor(
+    private calendar: NgbCalendar,
+    private http: HttpClient
+    ) {}
 
   ngOnInit(): void {
+    var sample1 = this.http.get('https://restcountries.com/v3.1/all');
+    sample1.subscribe(res => {
+      console.log(res);
+    })
     this.currentDate = this.calendar.getToday();
 
     this.customersChartOptions = getCustomerseChartOptions(this.obj);
