@@ -49,7 +49,7 @@ export class DashboardComponent implements OnInit {
     ) {}
 
   ngOnInit(): void {
-    var sample1 = this.http.get('https://restcountries.com/v3.1/all');
+    var sample1 = this.http.get('https://randomuser.me/api/');
     sample1.subscribe(res => {
       console.log(res);
     })
