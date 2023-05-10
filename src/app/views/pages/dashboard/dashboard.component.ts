@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { ChartConfiguration, ChartData, ChartType } from 'chart.js';
 import { NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -53,13 +53,45 @@ export class DashboardComponent implements OnInit {
     this.revenueChartOptions = getRevenueChartOptions(this.obj);
     this.monthlySalesChartOptions = getMonthlySalesChartOptions(this.obj);
     this.cloudStorageChartOptions = getCloudStorageChartOptions(this.obj);
-
     // Some RTL fixes. (feel free to remove if you are using LTR))
     if (document.querySelector('html')?.getAttribute('dir') === 'rtl') {
       this.addRtlOptions();
     }
 
+
   }
+
+/**
+   * Pie chart
+   */
+public pieChartOptions: ChartConfiguration['options'] = {
+  aspectRatio: 2,
+  plugins: {
+    legend: { 
+      display: true,
+      labels: {
+        color: this.obj.bodyColor,
+        font: {
+          size: 13,
+          family: this.obj.fontFamily
+        }
+      }
+    },
+  },
+};
+ public pieChartLabels: string[] = ["Open", "Pending", "Closed"];
+ public pieChartData: ChartData<'doughnut'> = {
+   labels: this.pieChartLabels,
+   datasets: [{
+    label: "Population (millions)",
+    backgroundColor: [this.obj.primary, this.obj.danger, this.obj.info],
+    hoverBackgroundColor: [this.obj.primary, this.obj.danger, this.obj.info],
+    borderColor: this.obj.cardBg,
+    hoverBorderColor: [this.obj.primary, this.obj.danger, this.obj.info],
+    data: [769,696,6969]
+   }]
+ };
+ public pieChartType: ChartType = 'pie';
 
 
   /**
@@ -74,6 +106,11 @@ export class DashboardComponent implements OnInit {
     this.monthlySalesChartOptions.yaxis.labels.offsetX = -10;
     this.monthlySalesChartOptions.yaxis.title.offsetX = -70;
   }
+    
+  /**
+   * Hide
+   */
+  isNotVisible: boolean = false; 
 }
 
 
