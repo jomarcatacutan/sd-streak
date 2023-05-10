@@ -23,7 +23,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "docs",
+            "outputPath": "dist",
             "allowedCommonJsDependencies": [
               "fast-deep-equal",
               "sweetalert2",
