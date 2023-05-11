@@ -27,6 +27,11 @@ export class DashboardComponent implements OnInit {
     success        : "#05a34a",
     info           : "#66d1d1",
     warning        : "#fbbc06",
+    Tyrian         : "#5f0f40",
+    DarkSun        : "#9a021f",
+    Orange         : "#fb8c23",
+    Darkorange     : "#e26413",
+    Darkblue       : "#104c5c",
     danger         : "#ff3366",
     light          : "#e9ecef",
     dark           : "#060c17",
@@ -79,16 +84,16 @@ public pieChartOptions: ChartConfiguration['options'] = {
     },
   },
 };
- public pieChartLabels: string[] = ["Incoming", "Action In Progres", "Waiting For Client Feedback", "Pending", "Completed", "On Hold"];
+ public pieChartLabels: string[] = ["Incoming", "Action In Progres", "Pending Client Feedback", "Completed", "On Hold"];
  public pieChartData: ChartData<'doughnut'> = {
    labels: this.pieChartLabels,
    datasets: [{
     label: "Population (millions)",
-    backgroundColor: [this.obj.primary, this.obj.success, this.obj.info, this.obj.warning, this.obj.dark, this.obj.danger,],
-    hoverBackgroundColor: [this.obj.primary, this.obj.success, this.obj.info, this.obj.warning, this.obj.dark, this.obj.danger,],
+    backgroundColor: [this.obj.Orange, this.obj.Darkorange, this.obj.Tyrian, this.obj.Darkblue, this.obj.DarkSun],
+    hoverBackgroundColor: [this.obj.Orange, this.obj.Darkorange, this.obj.Tyrian, this.obj.Darkblue, this.obj.DarkSun],
     borderColor: this.obj.cardBg,
-    hoverBorderColor: [this.obj.primary, this.obj.success, this.obj.info, this.obj.warning, this.obj.dark, this.obj.danger,],
-    data: [20,10,40,80,10,5]
+    hoverBorderColor: [this.obj.Orange, this.obj.Darkorange, this.obj.Tyrian, this.obj.Darkblue, this.obj.DarkSun],
+    data: [20,10,40,10,5]
    }]
  };
  public pieChartType: ChartType = 'pie';

@@ -1,3 +1,10 @@
+$Tyrian: #5f0f40;
+$DarkSun: #9a021f;
+$Orange: #fb8c23;
+$Darkorange: #e26413;
+$Darkblue: #104c5c;
+
+
 .status-report {
     .card-body {
        h6.card-title {
@@ -5,4 +12,29 @@
         font-weight: 600;
        }
     }
+}
+
+.bg-Tyrian {
+    background-color: $Tyrian;
+    color: #fff;
+}
+
+.bg-DarkSun {
+    background-color: $DarkSun;
+    color: #fff
+}
+
+.bg-Orange {
+    background-color: $Orange;
+    color: #fff
+}
+
+.bg-Darkorange {
+    background-color: $Darkorange;
+    color: #fff
+}
+
+.bg-Darkblue{
+    background-color: $Darkblue;
+    color: #fff
 }
