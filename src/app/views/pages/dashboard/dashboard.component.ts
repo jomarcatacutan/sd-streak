@@ -79,16 +79,16 @@ public pieChartOptions: ChartConfiguration['options'] = {
     },
   },
 };
- public pieChartLabels: string[] = ["Open", "Pending", "Closed"];
+ public pieChartLabels: string[] = ["Incoming", "Action In Progres", "Waiting For Client Feedback", "Pending", "Completed", "On Hold"];
  public pieChartData: ChartData<'doughnut'> = {
    labels: this.pieChartLabels,
    datasets: [{
     label: "Population (millions)",
-    backgroundColor: [this.obj.primary, this.obj.danger, this.obj.info],
-    hoverBackgroundColor: [this.obj.primary, this.obj.danger, this.obj.info],
+    backgroundColor: [this.obj.primary, this.obj.success, this.obj.info, this.obj.warning, this.obj.dark, this.obj.danger,],
+    hoverBackgroundColor: [this.obj.primary, this.obj.success, this.obj.info, this.obj.warning, this.obj.dark, this.obj.danger,],
     borderColor: this.obj.cardBg,
-    hoverBorderColor: [this.obj.primary, this.obj.danger, this.obj.info],
-    data: [769,696,6969]
+    hoverBorderColor: [this.obj.primary, this.obj.success, this.obj.info, this.obj.warning, this.obj.dark, this.obj.danger,],
+    data: [20,10,40,80,10,5]
    }]
  };
  public pieChartType: ChartType = 'pie';
