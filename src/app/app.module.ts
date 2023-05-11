@@ -13,11 +13,13 @@ import { ErrorPageComponent } from './views/pages/error-page/error-page.componen
 import { HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 
 import { HttpClientModule } from '@angular/common/http';
+import { CoachComponent } from './views/pages/coach/coach.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ErrorPageComponent,
+    CoachComponent,
   ],
   imports: [
     BrowserModule,
