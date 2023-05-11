@@ -17,6 +17,6 @@ export const MENU: MenuItem[] = [
   {
     label: 'Coach/Advisor',
     icon: 'users',
-    link: '/#'
+    link: '/coach'
   },
 ];
