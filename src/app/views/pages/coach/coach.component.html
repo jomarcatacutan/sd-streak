@@ -1,1 +1,55 @@
-<p>coach works!</p>
+<div class="row">
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Coach/Advisor List</h4>
+
+        <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th class="width-image"></th>
+                <th class="width-name">Name</th>
+                <th class="width-status">Incoming</th>
+                <th class="width-status">Action in Progress</th>
+                <th class="width-status">Pending Client Feedback</th>
+                <th class="width-status">Completed</th>
+                <th class="width-status">On Hold</th>
+                <th class="width-status">Average Resolution Time</th>
+                <th class="width-dropdown">View Tickets</th>
+            </tr>
+            </thead>
+            <tbody>
+            <ng-container *ngFor="let user of users; let i = index">
+                <tr>
+                    <td class="py-1">
+                    <img src="https://i.pravatar.cc/36" alt="image">
+                    </td>
+                    <td>{{user.name}}</td>
+                    <td class="ticket-count">{{user.incoming}}</td>
+                    <td class="ticket-count">{{user.actionInProgress}}</td>
+                    <td class="ticket-count">{{user.pendingClientFeedback}}</td>
+                    <td class="ticket-count">{{user.completed}}</td>
+                    <td class="ticket-count">{{user.onHold}}</td>
+                    <td class="ticket-count">{{user.averageResolutionTime}}</td>
+                    <td class="ticket-count">
+                        <button class="btn arrow-button" (click)="toggleDetail(i)">
+                            <i class="fas" [class]="showDetailIndex === i ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+                        </button>                        
+                    </td>                        
+                </tr>
+                <tr *ngIf="showDetailIndex === i">
+                    <td colspan="8">
+                        <table class="table table-striped">
+                            <p>List of Tickets</p>
+                        </table>
+                    </td>
+                </tr>
+            </ng-container>                
+            </tbody>
+        </table>
+        </div>
+    </div>
+    </div>
+</div>
+</div>
