@@ -116,6 +116,87 @@ public pieChartOptions: ChartConfiguration['options'] = {
    * Hide
    */
   isNotVisible: boolean = false; 
+
+
+  showDetailIndex: number | null = null;
+  users = [
+    {
+        ticketname: 'Ticket #001 Ticket name',
+        stage: 'Incoming',
+        assigned: 'Jomar Catacutan',
+        dayinstage: 4,
+        createby: 'Randolph Asuncion',
+        expectedcomplete: '05/15/2023',
+        datecreate: '05/10/2023'
+    },
+    {
+        ticketname: 'Ticket #001 Ticket name',
+        stage: 'Incoming',
+        assigned: 'Robin Berido Jr',
+        dayinstage: 4,
+        createby: 'Randolph Asuncion',
+        expectedcomplete: '05/15/2023',
+        datecreate: '05/10/2023'
+    },
+    {
+      ticketname: 'Ticket #001 Ticket name',
+      stage: 'Incoming',
+      assigned: 'Darwin Maglaqui',
+      dayinstage: 4,
+      createby: 'Randolph Asuncion',
+      expectedcomplete: '05/15/2023',
+      datecreate: '05/10/2023'
+    },
+    {
+      ticketname: 'Ticket #001 Ticket name',
+      stage: 'Action in Progress',
+      assigned: 'Mark Kevin Cacho',
+      dayinstage: 4,
+      createby: 'Randolph Asuncion',
+      expectedcomplete: '05/15/2023',
+      datecreate: '05/10/2023'
+    },
+    {
+      ticketname: 'Ticket #001 Ticket name',
+      stage: 'Action in Progress',
+      assigned: 'Christian Evans',
+      dayinstage: 4,
+      createby: 'Randolph Asuncion',
+      expectedcomplete: '05/15/2023',
+      datecreate: '05/10/2023'
+    },
+    {
+      ticketname: 'Ticket #001 Ticket name',
+      stage: 'Action in Progress',
+      assigned: 'Kyle Ryan Austria',
+      dayinstage: 4,
+      createby: 'Randolph Asuncion',
+      expectedcomplete: '05/15/2023',
+      datecreate: '05/10/2023'
+    },
+    {
+      ticketname: 'Ticket #001 Ticket name',
+      stage: 'Action in Progress',
+      assigned: 'Rowen Pangilinan',
+      dayinstage: 4,
+      createby: 'Randolph Asuncion',
+      expectedcomplete: '05/15/2023',
+      datecreate: '05/10/2023'
+    },
+    {
+      ticketname: 'Ticket #001 Ticket name',
+      stage: 'Action in Progress',
+      assigned: 'John Anthony Almario',
+      dayinstage: 4,
+      createby: 'Randolph Asuncion',
+      expectedcomplete: '05/15/2023',
+      datecreate: '05/10/2023'
+    },
+  ];
+
+  toggleDetail(index: number): void {
+    this.showDetailIndex = this.showDetailIndex === index ? null : index;
+  }
 }
 
 
