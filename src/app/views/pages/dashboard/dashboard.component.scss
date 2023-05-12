@@ -6,35 +6,90 @@ $Darkblue: #104c5c;
 
 
 .status-report {
-    .card-body {
-       h6.card-title {
-        font-size: 1.2em;
-        font-weight: 600;
-       }
+    .status-block {
+        position: relative;
     }
+    .card {
+        border: 0;
+        border-radius: 0;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        .card-body {
+            h6.card-title {
+             font-size: 0.8em;
+             font-weight: 600;
+            }
+         }
+         
+    }
+    .arrow-right::before {
+        content: "";
+        width: 30px;
+        position: absolute;
+        top: 0;
+        right: -29px;
+        bottom: 0;
+        clip-path: polygon(-4% -6%, -4% 105%, 100% 50%);
+        z-index: 1;
+    }
+    .bg-Orange.arrow-right::before {
+        background-color: $Orange;
+    }
+    .bg-Darkorange.arrow-right::before {
+        background-color: $Darkorange;
+    }
+    .bg-Tyrian.arrow-right::before {
+        background-color: $Tyrian;
+    }
+    .bg-Darkblue.arrow-right::before {
+        background-color: $Darkblue;
+    }
+    .status-wrap {
+        .stretch-card {
+            padding: 0;
+        }
+        .row {
+            margin: 0;
+        }
+    }
+    .bg-Tyrian {
+        background: linear-gradient(90deg, rgb(0 0 0) -127%, $Tyrian 34%, $Tyrian 100%);
+        color: #fff;
+        padding-left: 10%;
+    }
+
+    .bg-DarkSun {
+        background: linear-gradient(90deg, rgb(0 0 0) -127%, $DarkSun 34%, $DarkSun 100%);
+        color: #fff;
+        padding-left: 10%;
+    }
+
+    .bg-Orange {
+        background-color: $Orange;
+        color: #fff;
+        padding-left: 5%;
+    }
+
+    .bg-Darkorange {
+        background: linear-gradient(90deg, rgb(0 0 0) -127%, $Darkorange 34%, $Darkorange 100%);
+        color: #fff;
+        padding-left: 10%;
+    }
+
+    .bg-Darkblue{
+        background-color: $Darkblue;
+        background: linear-gradient(90deg, rgb(0 0 0) -127%, $Darkblue 34%, $Darkblue 100%);
+        color: #fff;
+        padding-left: 10%;
+    }
+
 }
 
-.bg-Tyrian {
-    background-color: $Tyrian;
-    color: #fff;
-}
 
-.bg-DarkSun {
-    background-color: $DarkSun;
-    color: #fff
-}
-
-.bg-Orange {
-    background-color: $Orange;
-    color: #fff
-}
-
-.bg-Darkorange {
-    background-color: $Darkorange;
-    color: #fff
-}
-
-.bg-Darkblue{
-    background-color: $Darkblue;
-    color: #fff
-}
+@media only screen and (min-width: 768px) {
+    .status-report {
+        .status-block {
+            width: 20%;
+        }
+    }
+  }
