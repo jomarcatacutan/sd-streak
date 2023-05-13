@@ -1,13 +1,17 @@
 <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
-  <div>
-    <h4 class="mb-3 mb-md-0 title-page">Dashboard</h4>
-  </div>
+  <h4 class="mb-3 mb-md-0 title-page">Dashboard</h4>
   <div class="d-flex align-items-center flex-wrap text-nowrap">
-    
+    <nav class="page-breadcrumb m-0">
+      <ol class="breadcrumb m-0">
+        <li class="breadcrumb-item active">Service Delivery</li>
+        <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+      </ol>
+    </nav>
   </div>
 </div>
 
 <div class="row status-report">
+  <div><h2 class="header mb-2">Today Ticket Count</h2></div>
   <div class="col-12 col-xl-12 stretch-card status-wrap">
     <div class="row flex-grow-1">
       <div class="col-12 grid-margin stretch-card status-block">
@@ -64,11 +68,107 @@
   </div>
 </div> <!-- row -->
 
+<div class="row status-report">
+  <div><h2 class="header mb-2">This Week Time In Stage Box</h2></div>
+  <div class="col-12 col-xl-12 stretch-card status-wrap">
+    <div class="row flex-grow-1">
+      <div class="col-12 grid-margin stretch-card status-block">
+        <div class="card bg-Orange arrow-right">
+          <div class="card-body">
+            <div>
+              <h3 class="mb-2">22 Hrs</h3>
+              <h6 class="card-title mb-0 subheader">Incoming</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 grid-margin stretch-card status-block">
+        <div class="card bg-Darkorange arrow-right">
+          <div class="card-body">
+            <div>
+              <h3 class="mb-2">1 Day</h3>
+              <h6 class="card-title mb-0 subheader">Action In Progres</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 grid-margin stretch-card status-block">
+        <div class="card bg-Tyrian arrow-right">
+          <div class="card-body">
+            <div>
+              <h3 class="mb-2">21 Hrs</h3>
+              <h6 class="card-title mb-0 heade subheader">Pending Client Feedback</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 grid-margin stretch-card status-block">
+        <div class="card bg-Darkblue">
+          <div class="card-body bg-Darkpink">
+            <div>
+              <h3 class="mb-2">1.1 Days</h3>
+              <h6 class="card-title mb-0 subheader">Completed</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> <!-- row -->
+
+<div class="row status-report">
+  <div><h2 class="header mb-2">This Month Time In Stage Box</h2></div>
+  <div class="col-12 col-xl-12 stretch-card status-wrap">
+    <div class="row flex-grow-1">
+      <div class="col-12 grid-margin stretch-card status-block">
+        <div class="card bg-Orange arrow-right">
+          <div class="card-body">
+            <div>
+              <h3 class="mb-2">23 Hrs</h3>
+              <h6 class="card-title mb-0 subheader">Incoming</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 grid-margin stretch-card status-block">
+        <div class="card bg-Darkorange arrow-right">
+          <div class="card-body">
+            <div>
+              <h3 class="mb-2">3.7 Days</h3>
+              <h6 class="card-title mb-0 subheader">Action In Progres</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 grid-margin stretch-card status-block">
+        <div class="card bg-Tyrian arrow-right">
+          <div class="card-body">
+            <div>
+              <h3 class="mb-2">2.3 Days</h3>
+              <h6 class="card-title mb-0 heade subheader">Pending Client Feedback</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 grid-margin stretch-card status-block">
+        <div class="card bg-Darkblue">
+          <div class="card-body bg-Darkpink">
+            <div>
+              <h3 class="mb-2">4.5 Days</h3>
+              <h6 class="card-title mb-0 subheader">Completed</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> <!-- row -->
+
 <div class="row">
   <div class="col-12 col-xl-12 stretch-card grid-margin">
     <div class="card">
       <div class="card-body">
-        <div class="card-header d-flex justify-content-between">
+        <div class="card-header d-flex justify-content-between p-0">
           <h6 class="card-title">SERVICE DELIVERY PIPELINE</h6>
           <div ngbDropdown class="mb-2">
             <button ngbDropdownToggle class="btn p-0 no-dropdown-toggle-icon" type="button" id="dropdownMenuButton7">
