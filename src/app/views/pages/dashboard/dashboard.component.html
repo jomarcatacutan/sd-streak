@@ -18,7 +18,7 @@
         <div class="card bg-Orange arrow-right">
           <div class="card-body">
             <div>
-              <h3 class="mb-2">21</h3>
+              <h3 class="mb-2">{{ ticket_status?.incoming_assigned }}</h3>
               <h6 class="card-title mb-0 subheader">Incoming</h6>
             </div>
           </div>
@@ -28,7 +28,7 @@
         <div class="card bg-Darkorange arrow-right">
           <div class="card-body">
             <div>
-              <h3 class="mb-2">31</h3>
+              <h3 class="mb-2">{{ ticket_status?.action_in_progress }}</h3>
               <h6 class="card-title mb-0 subheader">Action In Progres</h6>
             </div>
           </div>
@@ -38,7 +38,7 @@
         <div class="card bg-Tyrian arrow-right">
           <div class="card-body">
             <div>
-              <h3 class="mb-2">25</h3>
+              <h3 class="mb-2">{{ ticket_status?.pending_client_feedback }}</h3>
               <h6 class="card-title mb-0 heade subheader">Pending Client Feedback</h6>
             </div>
           </div>
@@ -48,7 +48,7 @@
         <div class="card bg-Darkblue arrow-right">
           <div class="card-body bg-Darkpink">
             <div>
-              <h3 class="mb-2">309</h3>
+              <h3 class="mb-2">{{ ticket_status?.completed }}</h3>
               <h6 class="card-title mb-0 subheader">Completed</h6>
             </div>
           </div>
@@ -58,7 +58,7 @@
         <div class="card bg-DarkSun">
           <div class="card-body">
             <div>
-              <h3 class="mb-2">5</h3>
+              <h3 class="mb-2">{{ ticket_status?.on_hold }}</h3>
               <h6 class="card-title mb-0 subheader">On Hold</h6>
             </div>
           </div>

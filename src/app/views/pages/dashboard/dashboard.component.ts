@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartConfiguration, ChartData, ChartType } from 'chart.js';
 import { NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-dashboard',
@@ -42,14 +43,23 @@ export class DashboardComponent implements OnInit {
     fontFamily     : "'Roboto', Helvetica, sans-serif"
   }
 
+  ticket_status: any;
+
   /**
    * NgbDatepicker
    */
   currentDate: NgbDateStruct;
 
-  constructor(private calendar: NgbCalendar) {}
+  constructor(
+    private calendar: NgbCalendar,
+    private http: HttpClient
+    ) {}
 
   ngOnInit(): void {
+    this.http.get('https://sd-api-isd.clarkoutsourcing.com/getrealtimecount').subscribe( (res: any) => {
+      this.ticket_status = res;
+    });
+
     this.currentDate = this.calendar.getToday();
 
     this.customersChartOptions = getCustomerseChartOptions(this.obj);
