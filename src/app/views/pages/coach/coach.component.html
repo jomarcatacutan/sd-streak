@@ -39,9 +39,34 @@
                     </td>                        
                 </tr>
                 <tr *ngIf="showDetailIndex === i">
-                    <td colspan="9">
-                        <table class="table table-striped">
-                            <p>List of Tickets</p>
+                    <td class="ticket-table-user" colspan="9">
+                        <table class="table">
+                            <tr *ngIf="showDetailIndex === i">
+                                <td colspan="9">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Ticket Name</th>
+                                                <th>Stage</th>
+                                                <th>Days in Stage</th>
+                                                <th>Created By</th>
+                                                <th>Date of Last Email</th>
+                                                <th>Date Created</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let ticket of user.tickets">
+                                                <td>{{ticket.name}}</td>
+                                                <td>{{ticket.stage}}</td>
+                                                <td>{{ticket.daysInStage}}</td>
+                                                <td>{{ticket.createdBy}}</td>
+                                                <td>{{ticket.dateOfLastEmail}}</td>
+                                                <td>{{ticket.dateCreated}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
                         </table>
                     </td>
                 </tr>

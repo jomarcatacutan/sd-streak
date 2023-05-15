@@ -15,7 +15,25 @@ export class CoachComponent implements OnInit {
         pendingClientFeedback: 4,
         completed: 8,
         onHold: 16,
-        averageResolutionTime: 2.5
+        averageResolutionTime: 2.5,
+        tickets: [
+            {
+              name: "Geiger | Meeting Topics",
+              stage: "Action in Progress",
+              daysInStage: 3,
+              createdBy: "Randolph Asuncion",
+              dateOfLastEmail: "05/26/2023",
+              dateCreated: "05/12/2023"
+            },
+            {
+              name: "TSP Wealth LLP | Client Visit",
+              stage: "Pending Client Feedback",
+              daysInStage: 1,
+              createdBy: "Randolph Asuncion",
+              dateOfLastEmail: "05/15/2023",
+              dateCreated: "05/6/2023"
+            }
+          ]
     },
     {
         name: 'Robin Berido Jr.',
@@ -24,7 +42,25 @@ export class CoachComponent implements OnInit {
         pendingClientFeedback: 9,
         completed: 18,
         onHold: 6,
-        averageResolutionTime: 1.8
+        averageResolutionTime: 1.8,
+        tickets: [
+            {
+              name: "Geiger | Meeting Topics",
+              stage: "Action in Progress",
+              daysInStage: 3,
+              createdBy: "Randolph Asuncion",
+              dateOfLastEmail: "05/26/2023",
+              dateCreated: "05/12/2023"
+            },
+            {
+              name: "TSP Wealth LLP | Client Visit",
+              stage: "Pending Client Feedback",
+              daysInStage: 1,
+              createdBy: "Randolph Asuncion",
+              dateOfLastEmail: "05/15/2023",
+              dateCreated: "05/6/2023"
+            }
+          ]
     },
     {
       name: 'Darwin Maglaqui',
@@ -33,7 +69,25 @@ export class CoachComponent implements OnInit {
       pendingClientFeedback: 20,
       completed: 12,
       onHold: 6,
-      averageResolutionTime: 3.6
+      averageResolutionTime: 3.6,
+      tickets: [
+          {
+            name: "American Textile | Meeting Topics",
+            stage: "Action in Progress",
+            daysInStage: 3,
+            createdBy: "Randolph Asuncion",
+            dateOfLastEmail: "05/26/2023",
+            dateCreated: "05/12/2023"
+          },
+          {
+            name: "Zuma | April Agent Incentives",
+            stage: "Pending Client Feedback",
+            daysInStage: 1,
+            createdBy: "Randolph Asuncion",
+            dateOfLastEmail: "05/15/2023",
+            dateCreated: "05/6/2023"
+          }
+        ]
     },
     {
       name: 'Mark Kevin Cacho',
@@ -42,7 +96,25 @@ export class CoachComponent implements OnInit {
       pendingClientFeedback: 7,
       completed: 28,
       onHold: 7,
-      averageResolutionTime: 0.8
+      averageResolutionTime: 0.8,
+      tickets: [
+          {
+            name: "Geiger | Meeting Topics",
+            stage: "Action in Progress",
+            daysInStage: 3,
+            createdBy: "Randolph Asuncion",
+            dateOfLastEmail: "05/26/2023",
+            dateCreated: "05/12/2023"
+          },
+          {
+            name: "TSP Wealth LLP | Client Visit",
+            stage: "Pending Client Feedback",
+            daysInStage: 1,
+            createdBy: "Randolph Asuncion",
+            dateOfLastEmail: "05/15/2023",
+            dateCreated: "05/6/2023"
+          }
+        ]
     },
     {
       name: 'Christian Evans',
@@ -51,7 +123,25 @@ export class CoachComponent implements OnInit {
       pendingClientFeedback: 19,
       completed: 26,
       onHold: 9,
-      averageResolutionTime: 1.1
+      averageResolutionTime: 1.1,
+      tickets: [
+          {
+            name: "Geiger | Meeting Topics",
+            stage: "Action in Progress",
+            daysInStage: 3,
+            createdBy: "Randolph Asuncion",
+            dateOfLastEmail: "05/26/2023",
+            dateCreated: "05/12/2023"
+          },
+          {
+            name: "TSP Wealth LLP | Client Visit",
+            stage: "Pending Client Feedback",
+            daysInStage: 1,
+            createdBy: "Randolph Asuncion",
+            dateOfLastEmail: "05/15/2023",
+            dateCreated: "05/6/2023"
+          }
+        ]
     },
     {
       name: 'Kyle Ryan Austria',
@@ -60,7 +150,25 @@ export class CoachComponent implements OnInit {
       pendingClientFeedback: 17,
       completed: 22,
       onHold: 32,
-      averageResolutionTime: 1.5
+      averageResolutionTime: 1.5,
+      tickets: [
+          {
+            name: "Geiger | Meeting Topics",
+            stage: "Action in Progress",
+            daysInStage: 3,
+            createdBy: "Randolph Asuncion",
+            dateOfLastEmail: "05/26/2023",
+            dateCreated: "05/12/2023"
+          },
+          {
+            name: "TSP Wealth LLP | Client Visit",
+            stage: "Pending Client Feedback",
+            daysInStage: 1,
+            createdBy: "Randolph Asuncion",
+            dateOfLastEmail: "05/15/2023",
+            dateCreated: "05/6/2023"
+          }
+        ]
     },
     {
       name: 'Rowen Pangilinan',
@@ -69,7 +177,25 @@ export class CoachComponent implements OnInit {
       pendingClientFeedback: 4,
       completed: 13,
       onHold: 7,
-      averageResolutionTime: 2.4
+      averageResolutionTime: 2.4,
+      tickets: [
+          {
+            name: "Geiger | Meeting Topics",
+            stage: "Action in Progress",
+            daysInStage: 3,
+            createdBy: "Randolph Asuncion",
+            dateOfLastEmail: "05/26/2023",
+            dateCreated: "05/12/2023"
+          },
+          {
+            name: "TSP Wealth LLP | Client Visit",
+            stage: "Pending Client Feedback",
+            daysInStage: 1,
+            createdBy: "Randolph Asuncion",
+            dateOfLastEmail: "05/15/2023",
+            dateCreated: "05/6/2023"
+          }
+        ]
     },
     {
       name: 'John Anthony Almario',
@@ -78,7 +204,25 @@ export class CoachComponent implements OnInit {
       pendingClientFeedback: 2,
       completed: 38,
       onHold: 6,
-      averageResolutionTime: 3.1
+      averageResolutionTime: 3.1,
+      tickets: [
+          {
+            name: "Geiger | Meeting Topics",
+            stage: "Action in Progress",
+            daysInStage: 3,
+            createdBy: "Randolph Asuncion",
+            dateOfLastEmail: "05/26/2023",
+            dateCreated: "05/12/2023"
+          },
+          {
+            name: "TSP Wealth LLP | Client Visit",
+            stage: "Pending Client Feedback",
+            daysInStage: 1,
+            createdBy: "Randolph Asuncion",
+            dateOfLastEmail: "05/15/2023",
+            dateCreated: "05/6/2023"
+          }
+        ]
     },
   ];
 
