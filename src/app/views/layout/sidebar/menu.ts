@@ -15,8 +15,8 @@ export const MENU: MenuItem[] = [
     isTitle: true
   },
   {
-    label: 'Coach/Advisor',
+    label: 'Team Members',
     icon: 'users',
-    link: '/coach'
+    link: '/team-members'
   },
 ];
