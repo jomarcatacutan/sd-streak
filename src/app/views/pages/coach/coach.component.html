@@ -11,78 +11,79 @@
 </div>
 
 <div class="row">
-<div class="col-lg-12 grid-margin stretch-card">
-    <div class="card">
-    <div class="card-body">
-        <h4 class="card-title">Coach/Advisor List</h4>
-
-        <div class="table-responsive">
-        <table class="table table-main-theme table-bordered">
-            <thead>
-            <tr>
-                <th class="width-name">Name</th>
-                <th class="width-status bg-Orange">Incoming</th>
-                <th class="width-status bg-Darkorange">Action in Progress</th>
-                <th class="width-status bg-Tyrian">Pending Client Feedback</th>
-                <th class="width-status bg-Darkblue">Completed</th>
-                <th class="width-status bg-DarkSun">On Hold</th>
-                <th class="width-status">Average Resolution Time</th>
-                <th class="width-dropdown">View Tickets</th>
-            </tr>
-            </thead>
-            <tbody>
-            <ng-container *ngFor="let user of users; let i = index">
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Coach/Advisor List</h4>
+    
+            <div class="table-responsive">
+            <table class="table table-main-theme table-bordered">
+                <thead>
                 <tr>
-                    <td class="coach-profile"><img src="https://i.pravatar.cc/36" alt="image"> {{user.name}}</td>
-                    <td class="ticket-count">{{user.incoming}}</td>
-                    <td class="ticket-count">{{user.actionInProgress}}</td>
-                    <td class="ticket-count">{{user.pendingClientFeedback}}</td>
-                    <td class="ticket-count">{{user.completed}}</td>
-                    <td class="ticket-count">{{user.onHold}}</td>
-                    <td class="ticket-count">{{user.averageResolutionTime}}</td>
-                    <td class="ticket-count">
-                        <button class="btn arrow-button" (click)="toggleDetail(i)">
-                            <i class="fas" [class]="showDetailIndex === i ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
-                        </button>                        
-                    </td>                        
+                    <th class="width-name">Name</th>
+                    <th class="width-status bg-Orange">Incoming</th>
+                    <th class="width-status bg-Darkorange">Action in Progress</th>
+                    <th class="width-status bg-Tyrian">Pending Client Feedback</th>
+                    <th class="width-status bg-Darkblue">Completed</th>
+                    <th class="width-status bg-DarkSun">On Hold</th>
+                    <th class="width-status">Average Resolution Time</th>
+                    <th class="width-dropdown">View Tickets</th>
                 </tr>
-                <tr *ngIf="showDetailIndex === i">
-                    <td class="ticket-table-user" colspan="9">
-                        <table class="table inner-table">
-                            <tr *ngIf="showDetailIndex === i">
-                                <td colspan="9" class="p-0">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>Ticket Name</th>
-                                                <th>Stage</th>
-                                                <th>Days in Stage</th>
-                                                <th>Created By</th>
-                                                <th>Date of Last Email</th>
-                                                <th>Date Created</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr *ngFor="let ticket of user.tickets">
-                                                <td>{{ticket.name}}</td>
-                                                <td>{{ticket.stage}}</td>
-                                                <td>{{ticket.daysInStage}}</td>
-                                                <td>{{ticket.createdBy}}</td>
-                                                <td>{{ticket.dateOfLastEmail}}</td>
-                                                <td>{{ticket.dateCreated}}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-            </ng-container>                
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                <ng-container *ngFor="let user of users; let i = index">
+                    <tr>
+                        <td class="coach-profile"><img [src]="user.image" alt="image">{{user.fullName}}</td>
+                        <td class="ticket-count">{{user.stages['INCOMING (ASSIGNED)'] ?? 0}}</td>
+                        <td class="ticket-count">{{user.stages['Action In Progress'] ?? 0}}</td>
+                        <td class="ticket-count">{{user.stages['Pending Client Feedback'] ?? 0}}</td>
+                        <td class="ticket-count">{{user.stages['Completed'] ?? 0}}</td>
+                        <td class="ticket-count">{{user.stages['On Hold'] ?? 0}}</td>
+                        <td class="ticket-count">5</td>
+                        <td class="ticket-count">
+                            <button class="btn arrow-button" (click)="toggleDetail(i)">
+                                <i class="fas" [class]="showDetailIndex === i ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+                            </button>                        
+                        </td>                        
+                    </tr>
+                    <tr *ngIf="showDetailIndex === i">
+                        <td class="ticket-table-user" colspan="9">
+                            <table class="table inner-table">
+                                <tr *ngIf="showDetailIndex === i">
+                                    <td colspan="9" class="p-0">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Ticket Name</th>
+                                                    <th>Stage</th>
+                                                    <th>Days in Stage</th>
+                                                    <th>Created By</th>
+                                                    <th>Date of Last Email</th>
+                                                    <th>Date Created</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let ticket of user.tickets">
+                                                    <!-- <td>{{ticket.name}}</td>
+                                                    <td>{{ticket.stage}}</td>
+                                                    <td>{{ticket.daysInStage}}</td>
+                                                    <td>{{ticket.createdBy}}</td>
+                                                    <td>{{ticket.dateOfLastEmail}}</td>
+                                                    <td>{{ticket.dateCreated}}</td> -->
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </ng-container>
+                </tbody>
+            </table>
+            </div>
         </div>
-    </div>
+        </div> 
     </div>
 </div>
-</div>
+    

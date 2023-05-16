@@ -14,7 +14,7 @@ import { NgChartsModule } from 'ng2-charts';
 import { NgApexchartsModule } from "ng-apexcharts";
 
 import { CoachComponent } from './coach.component';
-
+import { HttpClientModule } from '@angular/common/http';
 
 const routes: Routes = [
   {
@@ -33,7 +33,8 @@ const routes: Routes = [
     NgbDropdownModule,
     NgbDatepickerModule,
     NgApexchartsModule,
-    NgChartsModule
+    NgChartsModule,
+    HttpClientModule
   ]
 })
 export class CoachModule { }
