@@ -14,6 +14,7 @@ import { NgApexchartsModule } from "ng-apexcharts";
 
 import { DashboardComponent } from './dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
+import { TablesModule } from '../tables/tables.module';
 
 const routes: Routes = [
   {
@@ -34,6 +35,6 @@ const routes: Routes = [
     NgApexchartsModule,
     NgChartsModule,
     HttpClientModule
-  ]
+  ],
 })
 export class DashboardModule { }

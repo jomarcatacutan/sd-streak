@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ChartConfiguration, ChartData, ChartType } from 'chart.js';
 import { NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClient } from '@angular/common/http';
+import { DataTable } from 'simple-datatables';
 
 @Component({
   selector: 'app-dashboard',
@@ -43,92 +44,6 @@ export class DashboardComponent implements OnInit {
     fontFamily     : "'Roboto', Helvetica, sans-serif"
   }
 
-  current_ticket_count: any;
-
-  /**
-   * NgbDatepicker
-   */
-  currentDate: NgbDateStruct;
-
-  constructor(
-    private calendar: NgbCalendar,
-    private http: HttpClient
-    ) {}
-
-  ngOnInit(): void {
-    this.http.get('https://sd-api-isd.clarkoutsourcing.com/getrealtimecount').subscribe( (res: any) => {
-      this.current_ticket_count = res;
-    });
-
-    this.currentDate = this.calendar.getToday();
-
-    this.customersChartOptions = getCustomerseChartOptions(this.obj);
-    this.ordersChartOptions = getOrdersChartOptions(this.obj);
-    this.growthChartOptions = getGrowthChartOptions(this.obj);
-    this.revenueChartOptions = getRevenueChartOptions(this.obj);
-    this.monthlySalesChartOptions = getMonthlySalesChartOptions(this.obj);
-    this.cloudStorageChartOptions = getCloudStorageChartOptions(this.obj);
-    // Some RTL fixes. (feel free to remove if you are using LTR))
-    if (document.querySelector('html')?.getAttribute('dir') === 'rtl') {
-      this.addRtlOptions();
-    }
-
-
-  }
-
-/**
-   * Pie chart
-   */
-public pieChartOptions: ChartConfiguration['options'] = {
-  aspectRatio: 2,
-  plugins: {
-    legend: { 
-      display: true,
-      labels: {
-        color: this.obj.bodyColor,
-        font: {
-          size: 13,
-          family: this.obj.fontFamily
-        }
-      }
-    },
-  },
-};
- public pieChartLabels: string[] = ["Incoming", "Action In Progres", "Pending Client Feedback", "Completed", "On Hold"];
- public pieChartData: ChartData<'doughnut'> = {
-   labels: this.pieChartLabels,
-   datasets: [{
-    label: "Population (millions)",
-    backgroundColor: [this.obj.Orange, this.obj.Darkorange, this.obj.Tyrian, this.obj.Darkblue, this.obj.DarkSun],
-    hoverBackgroundColor: [this.obj.Orange, this.obj.Darkorange, this.obj.Tyrian, this.obj.Darkblue, this.obj.DarkSun],
-    borderColor: this.obj.cardBg,
-    hoverBorderColor: [this.obj.Orange, this.obj.Darkorange, this.obj.Tyrian, this.obj.Darkblue, this.obj.DarkSun],
-    data: [20,10,40,10,5]
-   }]
- };
- public pieChartType: ChartType = 'pie';
-
-
-  /**
-   * Only for RTL (feel free to remove if you are using LTR)
-   */
-  addRtlOptions() {
-    // Revenue chart
-    this.revenueChartOptions.yaxis.labels.offsetX = -25;
-    this.revenueChartOptions.yaxis.title.offsetX = -75;
-
-    //  Monthly sales chart
-    this.monthlySalesChartOptions.yaxis.labels.offsetX = -10;
-    this.monthlySalesChartOptions.yaxis.title.offsetX = -70;
-  }
-    
-  /**
-   * Hide
-   */
-  isNotVisible: boolean = false; 
-
-
-  showDetailIndex: number | null = null;
   users = [
     {
         ticketname: 'Ticket #001 Ticket name',
@@ -204,8 +119,103 @@ public pieChartOptions: ChartConfiguration['options'] = {
     },
   ];
 
+  current_ticket_count: any;
+
+  /**
+   * NgbDatepicker
+   */
+  currentDate: NgbDateStruct;
+
+  constructor(
+    private calendar: NgbCalendar,
+    private http: HttpClient
+    ) {}
+
+  ngOnInit(): void {
+    this.http.get('https://sd-api-isd.clarkoutsourcing.com/getrealtimecount').subscribe( (res: any) => {
+      this.current_ticket_count = res;
+    });
+
+    this.currentDate = this.calendar.getToday();
+
+    this.customersChartOptions = getCustomerseChartOptions(this.obj);
+    this.ordersChartOptions = getOrdersChartOptions(this.obj);
+    this.growthChartOptions = getGrowthChartOptions(this.obj);
+    this.revenueChartOptions = getRevenueChartOptions(this.obj);
+    this.monthlySalesChartOptions = getMonthlySalesChartOptions(this.obj);
+    this.cloudStorageChartOptions = getCloudStorageChartOptions(this.obj);
+    // Some RTL fixes. (feel free to remove if you are using LTR))
+    if (document.querySelector('html')?.getAttribute('dir') === 'rtl') {
+      this.addRtlOptions();
+    }
+
+
+  }
+
+  ngAfterViewInit() {
+    this.pagination();
+  }
+
+/**
+   * Pie chart
+   */
+public pieChartOptions: ChartConfiguration['options'] = {
+  aspectRatio: 2,
+  plugins: {
+    legend: { 
+      display: true,
+      labels: {
+        color: this.obj.bodyColor,
+        font: {
+          size: 13,
+          family: this.obj.fontFamily
+        }
+      }
+    },
+  },
+};
+ public pieChartLabels: string[] = ["Incoming", "Action In Progres", "Pending Client Feedback", "Completed", "On Hold"];
+ public pieChartData: ChartData<'doughnut'> = {
+   labels: this.pieChartLabels,
+   datasets: [{
+    label: "Population (millions)",
+    backgroundColor: [this.obj.Orange, this.obj.Darkorange, this.obj.Tyrian, this.obj.Darkblue, this.obj.DarkSun],
+    hoverBackgroundColor: [this.obj.Orange, this.obj.Darkorange, this.obj.Tyrian, this.obj.Darkblue, this.obj.DarkSun],
+    borderColor: this.obj.cardBg,
+    hoverBorderColor: [this.obj.Orange, this.obj.Darkorange, this.obj.Tyrian, this.obj.Darkblue, this.obj.DarkSun],
+    data: [20,10,40,10,5]
+   }]
+ };
+ public pieChartType: ChartType = 'pie';
+
+
+  /**
+   * Only for RTL (feel free to remove if you are using LTR)
+   */
+  addRtlOptions() {
+    // Revenue chart
+    this.revenueChartOptions.yaxis.labels.offsetX = -25;
+    this.revenueChartOptions.yaxis.title.offsetX = -75;
+
+    //  Monthly sales chart
+    this.monthlySalesChartOptions.yaxis.labels.offsetX = -10;
+    this.monthlySalesChartOptions.yaxis.title.offsetX = -70;
+  }
+    
+  /**
+   * Hide
+   */
+  isNotVisible: boolean = false; 
+
+
+  showDetailIndex: number | null = null;
+
   toggleDetail(index: number): void {
     this.showDetailIndex = this.showDetailIndex === index ? null : index;
+  }
+
+  pagination () {
+    const dataTable = new DataTable("#dataTableTickets");
   }
 }
 

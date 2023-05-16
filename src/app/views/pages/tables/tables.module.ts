@@ -42,5 +42,6 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     NgxDatatableModule
   ]
+  //,exports : [TablesComponent, BasicTableComponent, DataTableComponent, NgxDatatableComponent]
 })
 export class TablesModule { }
