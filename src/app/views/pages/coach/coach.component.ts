@@ -39,7 +39,6 @@ ngOnInit(): void {
       image: res[key].image,
       stages: res[key].stages,
     }));
-    console.log(this.users);
   })
 }
 
