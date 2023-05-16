@@ -1,3 +1,9 @@
+$Tyrian: #5f0f40;
+$DarkSun: #9a021f;
+$Orange: #fb8c23;
+$Darkorange: #e26413;
+$Darkblue: #104c5c;
+
 .width-image {
     width: 3%;
 }
@@ -25,6 +31,64 @@
     text-align: center;
 }
 
-.ticket-table-user {
-    padding: 0;
+.table-main-theme {
+    th {
+        background-color: #02447d;
+        color: #fff;
+    }
+    .coach-profile img {
+        margin-right: 10px;
+    }
+    tbody {
+        td:first-child {
+            border-left-width: 0;
+        }
+        td:last-child {
+            border-right-width: 0;
+        }
+        tr {
+            td {
+                vertical-align:middle;
+                padding: 10px 10px;
+            }
+            .ticket-table-user {
+                padding: 0;
+            }
+        }
+    }
+    .bg-Tyrian {
+        background-color: $Tyrian;
+        color: #fff;
+    }
+    
+    .bg-DarkSun {
+        background-color: $DarkSun;
+        color: #fff;
+    
+    }
+    
+    .bg-Orange {
+        background-color: $Orange;
+        color: #fff;
+    }
+    
+    .bg-Darkorange {
+        background-color: $Darkorange;
+        color: #fff;
+    }
+    
+    .bg-Darkblue{
+        background-color: $Darkblue;
+        color: #fff;
+    }
+    .inner-table {
+        margin-bottom: 20px;
+        border: 1px solid #444;
+        box-shadow: 0px 4px 19px 0 rgb(183 192 206 / 71%);
+        -webkit-box-shadow: 0px 4px 19px 0 rgb(183 192 206 / 71%);
+        -moz-box-shadow: 0px 4px 19px 0 rgb(183 192 206 / 71%);
+        -ms-box-shadow: 0px 4px 19px 0 rgb(183 192 206 / 71%);
+    }
 }
+
+
