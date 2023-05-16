@@ -43,7 +43,7 @@ export class DashboardComponent implements OnInit {
     fontFamily     : "'Roboto', Helvetica, sans-serif"
   }
 
-  ticket_status: any;
+  current_ticket_count: any;
 
   /**
    * NgbDatepicker
@@ -57,7 +57,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.http.get('https://sd-api-isd.clarkoutsourcing.com/getrealtimecount').subscribe( (res: any) => {
-      this.ticket_status = res;
+      this.current_ticket_count = res;
     });
 
     this.currentDate = this.calendar.getToday();
