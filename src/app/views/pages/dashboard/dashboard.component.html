@@ -11,7 +11,7 @@
 </div>
 
 <div class="row status-report">
-  <div><h2 class="header mb-2">Today Ticket Count</h2></div>
+  <div><h2 class="header mb-2">Current Ticket Count</h2></div>
   <div class="col-12 col-xl-12 stretch-card status-wrap">
     <div class="row flex-grow-1">
       <div class="col-12 grid-margin stretch-card status-block">
@@ -69,14 +69,14 @@
 </div> <!-- row -->
 
 <div class="row status-report">
-  <div><h2 class="header mb-2">This Week Time In Stage Box</h2></div>
+  <div><h2 class="header mb-2">Weekly Ticket Count</h2></div>
   <div class="col-12 col-xl-12 stretch-card status-wrap">
     <div class="row flex-grow-1">
       <div class="col-12 grid-margin stretch-card status-block">
         <div class="card bg-Orange arrow-right">
           <div class="card-body">
             <div>
-              <h3 class="mb-2">22 Hrs</h3>
+              <h3 class="mb-2">{{ weekly_ticket_count?.incoming_assigned }}</h3>
               <h6 class="card-title mb-0 subheader">Incoming</h6>
             </div>
           </div>
@@ -86,7 +86,7 @@
         <div class="card bg-Darkorange arrow-right">
           <div class="card-body">
             <div>
-              <h3 class="mb-2">1 Day</h3>
+              <h3 class="mb-2">{{ weekly_ticket_count?.action_in_progress }}</h3>
               <h6 class="card-title mb-0 subheader">Action In Progress</h6>
             </div>
           </div>
@@ -96,18 +96,28 @@
         <div class="card bg-Tyrian arrow-right">
           <div class="card-body">
             <div>
-              <h3 class="mb-2">21 Hrs</h3>
+              <h3 class="mb-2">{{ weekly_ticket_count?.pending_client_feedback }}</h3>
               <h6 class="card-title mb-0 heade subheader">Pending Client Feedback</h6>
             </div>
           </div>
         </div>
       </div>
       <div class="col-12 grid-margin stretch-card status-block">
-        <div class="card bg-Darkblue">
+        <div class="card bg-Darkblue arrow-right">
           <div class="card-body bg-Darkpink">
             <div>
-              <h3 class="mb-2">1.1 Days</h3>
+              <h3 class="mb-2">{{ weekly_ticket_count?.completed }}</h3>
               <h6 class="card-title mb-0 subheader">Completed</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 grid-margin stretch-card status-block">
+        <div class="card bg-DarkSun">
+          <div class="card-body">
+            <div>
+              <h3 class="mb-2">{{ weekly_ticket_count?.on_hold }}</h3>
+              <h6 class="card-title mb-0 subheader">On Hold</h6>
             </div>
           </div>
         </div>
@@ -117,14 +127,14 @@
 </div> <!-- row -->
 
 <div class="row status-report">
-  <div><h2 class="header mb-2">This Month Time In Stage Box</h2></div>
+  <div><h2 class="header mb-2">Monthly Ticket Count</h2></div>
   <div class="col-12 col-xl-12 stretch-card status-wrap">
     <div class="row flex-grow-1">
       <div class="col-12 grid-margin stretch-card status-block">
         <div class="card bg-Orange arrow-right">
           <div class="card-body">
             <div>
-              <h3 class="mb-2">23 Hrs</h3>
+              <h3 class="mb-2">{{ monthly_ticket_count?.incoming_assigned }}</h3>
               <h6 class="card-title mb-0 subheader">Incoming</h6>
             </div>
           </div>
@@ -134,7 +144,7 @@
         <div class="card bg-Darkorange arrow-right">
           <div class="card-body">
             <div>
-              <h3 class="mb-2">3.7 Days</h3>
+              <h3 class="mb-2">{{ monthly_ticket_count?.action_in_progress }}</h3>
               <h6 class="card-title mb-0 subheader">Action In Progress</h6>
             </div>
           </div>
@@ -144,18 +154,28 @@
         <div class="card bg-Tyrian arrow-right">
           <div class="card-body">
             <div>
-              <h3 class="mb-2">2.3 Days</h3>
+              <h3 class="mb-2">{{ monthly_ticket_count?.pending_client_feedback }}</h3>
               <h6 class="card-title mb-0 heade subheader">Pending Client Feedback</h6>
             </div>
           </div>
         </div>
       </div>
       <div class="col-12 grid-margin stretch-card status-block">
-        <div class="card bg-Darkblue">
+        <div class="card bg-Darkblue arrow-right">
           <div class="card-body bg-Darkpink">
             <div>
-              <h3 class="mb-2">4.5 Days</h3>
+              <h3 class="mb-2">{{ monthly_ticket_count?.completed }}</h3>
               <h6 class="card-title mb-0 subheader">Completed</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 grid-margin stretch-card status-block">
+        <div class="card bg-DarkSun">
+          <div class="card-body">
+            <div>
+              <h3 class="mb-2">{{ monthly_ticket_count?.on_hold }}</h3>
+              <h6 class="card-title mb-0 subheader">On Hold</h6>
             </div>
           </div>
         </div>
@@ -193,11 +213,49 @@
           [limit]="10"
           rowHeight="auto"
           >
+
           <ngx-datatable-column *ngFor="let col of headers" [name]="col.id" [sortable]="true" [canAutoResize]="true" [draggable]="true" [resizeable]="true">
             <ng-template ngx-datatable-header-template let-sort="sortFn">
               <span>{{ col.label }}</span>
             </ng-template>
           </ngx-datatable-column>
+          
+          <!-- Add a new column for the arrow -->
+          <ngx-datatable-column [width]="50" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">
+            <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+              <!-- toggle the expand/collapse arrow -->
+              <a
+                href="javascript:void(0)"
+                [class.datatable-icon-right]="!expanded"
+                [class.datatable-icon-down]="expanded"
+                title="Expand/Collapse Row"
+                (click)="toggleExpandRow(row)"
+              ></a>
+            </ng-template>
+          </ngx-datatable-column>
+
+          <!-- Define row detail template -->
+          <ngx-datatable-row-detail #rowDetailTemplate [rowHeight]="100">
+            <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+              <table class="detail-table">
+                <thead>
+                  <tr>
+                    <th *ngFor="let detailHeader of detailHeaders">
+                      {{ detailHeader.label }}
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td *ngFor="let detailHeader of detailHeaders">
+                      {{ row[detailHeader.id] }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </ng-template>
+          </ngx-datatable-row-detail>
+
           </ngx-datatable>
         </div>
       </div>

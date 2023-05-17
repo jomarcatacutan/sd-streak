@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChartConfiguration, ChartData, ChartType } from 'chart.js';
 import { NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClient } from '@angular/common/http';
 import { DataTable } from 'simple-datatables';
 import { ColumnMode } from '@swimlane/ngx-datatable';
+import { DatatableComponent } from '@swimlane/ngx-datatable';
 
 @Component({
   selector: 'app-dashboard',
@@ -56,6 +57,8 @@ export class DashboardComponent implements OnInit {
     {"id": "displayName", "label": "Assigned"},
     {"id": "lastEntryToStageDays", "label": "Days in Stage"},
     {"id": "creationDate", "label": "Date Created"},
+  ];
+  detailHeaders = [
     {"id": "lastEmailReceivedTimeStamp", "label": "Date of Last Email"},
     {"id": "freshness", "label": "Freshness"},
     {"id": "lastUpdatedTimeStamp", "label": "Date Last Updated"},
@@ -64,11 +67,15 @@ export class DashboardComponent implements OnInit {
     {"id": "lastEmailFrom", "label": "Last Email From"}
   ];
 
-  /** Current Ticket Count */
+  /** Ticket Count */
   current_ticket_count: any;
+  weekly_ticket_count: any;
+  monthly_ticket_count: any;
 
   /** All Ticket List */
   all_tickets: any;
+
+  @ViewChild(DatatableComponent, { static: false }) table: DatatableComponent;
 
   constructor(
     private calendar: NgbCalendar,
@@ -91,11 +98,24 @@ export class DashboardComponent implements OnInit {
   
       req.send();
     }
+
+  toggleExpandRow(row: any) {
+    this.table.rowDetail.toggleExpandRow(row);
+    console.log(row);
+  }
     
   ngOnInit(): void {
-    /** Get Current Ticket Count */
+    /** Get Ticket Count */
     this.http.get('https://sd-api-isd.clarkoutsourcing.com/getrealtimecount').subscribe( (res: any) => {
       this.current_ticket_count = res;
+    });
+
+    this.http.get('https://sd-api-isd.clarkoutsourcing.com/getweekcount').subscribe( (res: any) => {
+      this.weekly_ticket_count = res;
+    });
+
+    this.http.get('https://sd-api-isd.clarkoutsourcing.com/getmonthcount').subscribe((res: any) => {
+      this.monthly_ticket_count = res;
     });
 
     this.currentDate = this.calendar.getToday();
