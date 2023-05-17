@@ -3,6 +3,7 @@ import { ChartConfiguration, ChartData, ChartType } from 'chart.js';
 import { NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClient } from '@angular/common/http';
 import { DataTable } from 'simple-datatables';
+import { ColumnMode } from '@swimlane/ngx-datatable';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,18 +11,17 @@ import { DataTable } from 'simple-datatables';
   styleUrls: ['./dashboard.component.scss'],
   preserveWhitespaces: true
 })
+
 export class DashboardComponent implements OnInit {
 
-  /**
-   * Apex chart
-   */
+  /** Apex chart */
   public customersChartOptions: any = {};
   public ordersChartOptions: any = {};
   public growthChartOptions: any = {};
   public revenueChartOptions: any = {};
   public monthlySalesChartOptions: any = {};
   public cloudStorageChartOptions: any = {};
-
+  dtOptions: any;
   // colors and font variables for apex chart 
   obj = {
     primary        : "#6571ff",
@@ -44,94 +44,56 @@ export class DashboardComponent implements OnInit {
     fontFamily     : "'Roboto', Helvetica, sans-serif"
   }
 
-  users = [
-    {
-        ticketname: 'Ticket #001 Ticket name',
-        stage: 'Incoming',
-        assigned: 'Jomar Catacutan',
-        dayinstage: 4,
-        createby: 'Randolph Asuncion',
-        expectedcomplete: '05/15/2023',
-        datecreate: '05/10/2023'
-    },
-    {
-        ticketname: 'Ticket #001 Ticket name',
-        stage: 'Incoming',
-        assigned: 'Robin Berido Jr',
-        dayinstage: 4,
-        createby: 'Randolph Asuncion',
-        expectedcomplete: '05/15/2023',
-        datecreate: '05/10/2023'
-    },
-    {
-      ticketname: 'Ticket #001 Ticket name',
-      stage: 'Incoming',
-      assigned: 'Darwin Maglaqui',
-      dayinstage: 4,
-      createby: 'Randolph Asuncion',
-      expectedcomplete: '05/15/2023',
-      datecreate: '05/10/2023'
-    },
-    {
-      ticketname: 'Ticket #001 Ticket name',
-      stage: 'Action in Progress',
-      assigned: 'Mark Kevin Cacho',
-      dayinstage: 4,
-      createby: 'Randolph Asuncion',
-      expectedcomplete: '05/15/2023',
-      datecreate: '05/10/2023'
-    },
-    {
-      ticketname: 'Ticket #001 Ticket name',
-      stage: 'Action in Progress',
-      assigned: 'Christian Evans',
-      dayinstage: 4,
-      createby: 'Randolph Asuncion',
-      expectedcomplete: '05/15/2023',
-      datecreate: '05/10/2023'
-    },
-    {
-      ticketname: 'Ticket #001 Ticket name',
-      stage: 'Action in Progress',
-      assigned: 'Kyle Ryan Austria',
-      dayinstage: 4,
-      createby: 'Randolph Asuncion',
-      expectedcomplete: '05/15/2023',
-      datecreate: '05/10/2023'
-    },
-    {
-      ticketname: 'Ticket #001 Ticket name',
-      stage: 'Action in Progress',
-      assigned: 'Rowen Pangilinan',
-      dayinstage: 4,
-      createby: 'Randolph Asuncion',
-      expectedcomplete: '05/15/2023',
-      datecreate: '05/10/2023'
-    },
-    {
-      ticketname: 'Ticket #001 Ticket name',
-      stage: 'Action in Progress',
-      assigned: 'John Anthony Almario',
-      dayinstage: 4,
-      createby: 'Randolph Asuncion',
-      expectedcomplete: '05/15/2023',
-      datecreate: '05/10/2023'
-    },
+  /** NgbDatepicker */
+  currentDate: NgbDateStruct;
+  rows = [];
+  loadingIndicator = true;
+  reorderable = true;
+  ColumnMode = ColumnMode;
+  headers = [
+    {"id": "name", "label": "Ticket Name"},
+    {"id": "stage", "label": "Stage"},
+    {"id": "displayName", "label": "Assigned"},
+    {"id": "lastEntryToStageDays", "label": "Days in Stage"},
+    {"id": "creationDate", "label": "Date Created"},
+    {"id": "lastEmailReceivedTimeStamp", "label": "Date of Last Email"},
+    {"id": "freshness", "label": "Freshness"},
+    {"id": "lastUpdatedTimeStamp", "label": "Date Last Updated"},
+    {"id": "firstEmailReceivedTimeStamp", "label": "Date of First Received"},
+    {"id": "totalNumberOfEmails", "label": "Total Email Message"},
+    {"id": "lastEmailFrom", "label": "Last Email From"}
   ];
 
+  /** Current Ticket Count */
   current_ticket_count: any;
 
-  /**
-   * NgbDatepicker
-   */
-  currentDate: NgbDateStruct;
+  /** All Ticket List */
+  all_tickets: any;
 
   constructor(
     private calendar: NgbCalendar,
     private http: HttpClient
-    ) {}
+    ) {
+       this.fetch((data: any) => {
+      this.rows = data;
+      setTimeout(() => {
+        this.loadingIndicator = false;
+      }, 1500);
+    });
+    }
 
+    fetch(cb: any) {
+      const req = new XMLHttpRequest();
+      req.open('GET', `https://sd-api-isd.clarkoutsourcing.com/gettickets`);
+      req.onload = () => {
+        cb(JSON.parse(req.response));
+      };
+  
+      req.send();
+    }
+    
   ngOnInit(): void {
+    /** Get Current Ticket Count */
     this.http.get('https://sd-api-isd.clarkoutsourcing.com/getrealtimecount').subscribe( (res: any) => {
       this.current_ticket_count = res;
     });
@@ -149,16 +111,13 @@ export class DashboardComponent implements OnInit {
       this.addRtlOptions();
     }
 
-
   }
 
   ngAfterViewInit() {
-    this.pagination();
+    
   }
 
-/**
-   * Pie chart
-   */
+/*** Pie chart */
 public pieChartOptions: ChartConfiguration['options'] = {
   aspectRatio: 2,
   plugins: {
@@ -216,6 +175,7 @@ public pieChartOptions: ChartConfiguration['options'] = {
 
   pagination () {
     const dataTable = new DataTable("#dataTableTickets");
+    
   }
 }
 

@@ -184,51 +184,23 @@
           </div>
         </div>
         <div class="table-responsive">
-          <!-- <app-data-table>
-          </app-data-table> -->
-          <table id="dataTableTickets" class="table table-striped">
-              <thead>
-              <tr>
-                <th class="width-name">Ticket Name</th>
-                <th class="width-status">Stage</th>
-                <th class="width-name">Assigned</th>
-                <th class="width-status">Days in Stage</th>
-                <th class="width-name">Created By</th>
-                <th class="width-status">Expected Complete</th>
-                <th class="width-status">Date Created</th>
-                <th class="width-dropdown">View Tickets</th>
-              </tr>
-              </thead>
-              <tbody>
-              <ng-container *ngFor="let user of users; let i = index">
-                  <tr>
-                      <td>{{user.ticketname}}</td>
-                      <td class="ticket-count">{{user.stage}}</td>
-                      <td class="ticket-count">{{user.assigned}}</td>
-                      <td class="ticket-count">{{user.dayinstage}}</td> 
-                      <td class="ticket-count">{{user.createby}}</td>
-                      <td class="ticket-count">{{user.expectedcomplete}}</td>
-                      <td class="ticket-count">{{user.datecreate}}</td>
-                      <td class="ticket-count">
-                          <button class="btn arrow-button" (click)="toggleDetail(i)">
-                              <i class="fas" [class]="showDetailIndex === i ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
-                          </button>                        
-                      </td>                        
-                  </tr>
-                  <tr *ngIf="showDetailIndex === i">
-                      <td colspan="9">
-                          <table class="table table-striped">
-                              <p>List of Tickets</p>
-                          </table>
-                      </td>
-                  </tr>
-              </ng-container>                
-              </tbody>
-          </table>
-          </div>
-
+          <ngx-datatable
+          class="bootstrap"
+          [rows]="rows"
+          [loadingIndicator]="loadingIndicator"
+          [columnMode]="ColumnMode.force"
+          [footerHeight]="50"
+          [limit]="10"
+          rowHeight="auto"
+          >
+          <ngx-datatable-column *ngFor="let col of headers" [name]="col.id" [sortable]="true" [canAutoResize]="true" [draggable]="true" [resizeable]="true">
+            <ng-template ngx-datatable-header-template let-sort="sortFn">
+              <span>{{ col.label }}</span>
+            </ng-template>
+          </ngx-datatable-column>
+          </ngx-datatable>
+        </div>
       </div>
     </div>
   </div>
-</div> <!-- row -->
-
+</div>

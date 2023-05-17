@@ -14,6 +14,7 @@ import { NgApexchartsModule } from "ng-apexcharts";
 
 import { DashboardComponent } from './dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 const routes: Routes = [
   {
@@ -33,7 +34,8 @@ const routes: Routes = [
     NgbDatepickerModule,
     NgApexchartsModule,
     NgChartsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxDatatableModule
   ],
 })
 export class DashboardModule { }
