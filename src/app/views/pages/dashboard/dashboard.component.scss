@@ -85,15 +85,6 @@ $Darkblue: #104c5c;
 
 }
 
-
-@media only screen and (min-width: 768px) {
-    .status-report {
-        .status-block {
-            width: 20%;
-        }
-    }
-  }
-
 .arrow-button {
     padding: 0;
     border: none;
@@ -105,7 +96,7 @@ $Darkblue: #104c5c;
     border-collapse: collapse;
   
     thead {
-      background-color: #f8f9fa;
+      background-color: transparent;
     }
   
     th, td {
@@ -118,3 +109,56 @@ $Darkblue: #104c5c;
       background-color: #f2f2f2;
     }
 }
+
+#dashboard-table-section{
+    ::ng-deep .datatable-body {
+        .datatable-row-even {
+            background-color: #fff;
+            max-width: 100%;
+            width: auto !important; 
+        }
+        .datatable-body-row {
+            max-width: 100%;
+            width: auto !important; 
+            .datatable-row-group {
+                max-width: 100%;
+                width: auto !important; 
+            }
+        }
+        .datatable-row-detail {
+            height: auto !important;
+            background-color: #fff;
+            border: 20px solid #e9ecef;
+        }
+    }
+    ::ng-deep  .datatable-header {
+        .datatable-header-inner { 
+                background-color: #e9ecef;
+                font-weight: 600;
+        }
+    }
+    
+    ::ng-deep .datatable-scroll {
+        width: auto !important;
+        max-width: 100%;
+    }
+    
+    ::ng-deep  .datatable-row-wrapper[ng-reflect-expanded="true"] {
+
+        background-color: #e9ecef;
+        border-top: 2px solid;
+        
+        .datatable-row-even[ng-reflect-expanded="true"] {
+            background-color: #e9ecef;
+        }
+    }
+}
+
+
+@media only screen and (min-width: 768px) {
+    .status-report {
+        .status-block {
+            width: 20%;
+        }
+    }
+  }

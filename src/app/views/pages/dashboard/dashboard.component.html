@@ -184,7 +184,7 @@
   </div>
 </div> <!-- row -->
 
-<div class="row">
+<div class="row" id="dashboard-table-section">
   <div class="col-12 col-xl-12 stretch-card grid-margin">
     <div class="card">
       <div class="card-body">
@@ -226,8 +226,8 @@
               <!-- toggle the expand/collapse arrow -->
               <a
                 href="javascript:void(0)"
-                [class.datatable-icon-right]="!expanded"
-                [class.datatable-icon-down]="expanded"
+                [class.datatable-icon-down]="!expanded"
+                [class.datatable-icon-up]="expanded"
                 title="Expand/Collapse Row"
                 (click)="toggleExpandRow(row)"
               ></a>
