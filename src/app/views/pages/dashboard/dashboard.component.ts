@@ -121,9 +121,27 @@ export class DashboardComponent implements OnInit {
     const req = new XMLHttpRequest();
     req.open('GET', `https://sd-api-isd.clarkoutsourcing.com/gettickets`);
     req.onload = () => {
-      cb(JSON.parse(req.response));
+      let data = JSON.parse(req.response);
+      data = data.map((item: any) => {
+        const creationDate = new Date(item.creationDate);
+        const formattedCreationDate = creationDate.toLocaleString('en-US', { 
+          year: 'numeric', 
+          month: 'short', 
+          day: '2-digit', 
+          hour: '2-digit', 
+          minute: '2-digit', 
+          second: '2-digit', 
+          hour12: true 
+        });
+        return {
+          ...item,
+          creationDate,
+          formattedCreationDate
+        }
+      });
+      cb(data);
     };
-
+    
     req.send();
   }
     

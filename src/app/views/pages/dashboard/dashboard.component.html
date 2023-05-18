@@ -214,11 +214,21 @@
           rowHeight="auto"
           >
 
-          <ngx-datatable-column *ngFor="let col of headers" [name]="col.id" [sortable]="true" [canAutoResize]="true" [draggable]="true" [resizeable]="true">
+          <ngx-datatable-column 
+          *ngFor="let col of headers" 
+          [name]="col.id" 
+          [sortable]="true" 
+          [prop]="col.id === 'creationDate' ? 'creationDate' : col.id"
+          [canAutoResize]="true" 
+          [draggable]="true" 
+          [resizeable]="true">
+            <ng-template ngx-datatable-cell-template let-row="row" let-value="value">
+              <span>{{ col.id === 'creationDate' ? row.formattedCreationDate : value }}</span>
+            </ng-template>
             <ng-template ngx-datatable-header-template let-sort="sortFn">
               <span>{{ col.label }}</span>
             </ng-template>
-          </ngx-datatable-column>
+        </ngx-datatable-column>        
           
           <!-- Add a new column for the arrow -->
           <ngx-datatable-column [width]="50" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">
