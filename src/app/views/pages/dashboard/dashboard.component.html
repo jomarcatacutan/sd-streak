@@ -66,7 +66,7 @@
       </div>
     </div>
   </div>
-</div> <!-- row -->
+</div>
 
 <div class="row status-report">
   <div><h2 class="header mb-2">Weekly Ticket Count</h2></div>
@@ -124,7 +124,7 @@
       </div>
     </div>
   </div>
-</div> <!-- row -->
+</div>
 
 <div class="row status-report">
   <div><h2 class="header mb-2">Monthly Ticket Count</h2></div>
@@ -182,7 +182,25 @@
       </div>
     </div>
   </div>
-</div> <!-- row -->
+</div>
+
+<div class="row status-report">
+  <div><h2 class="header mb-2">Average Time for First Response</h2></div>
+  <div class="col-12 col-xl-12 stretch-card status-wrap">
+    <div class="row flex-grow-1">
+      <div class="col-12 grid-margin stretch-card status-block">
+        <div class="card bg-Orange">
+          <div class="card-body">
+            <div>
+              <h3 class="mb-2">{{ monthly_ticket_count?.incoming_assigned }}</h3>
+              <h6 class="card-title mb-0 subheader">Incoming</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="row" id="dashboard-table-section">
   <div class="col-12 col-xl-12 stretch-card grid-margin">
