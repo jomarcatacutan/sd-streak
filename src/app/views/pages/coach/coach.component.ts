@@ -78,6 +78,8 @@ export class CoachComponent implements OnInit {
       return 'green';
     } else if (time > 8 && time <= 16) {
       return 'yellow';
+    } else if (time > 16 && time <= 24) {
+      return 'orange';
     } else {
       return 'red';
     }
