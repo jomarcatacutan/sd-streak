@@ -189,11 +189,31 @@
   <div class="col-12 col-xl-12 stretch-card status-wrap">
     <div class="row flex-grow-1">
       <div class="col-12 grid-margin stretch-card status-block">
-        <div class="card bg-Orange">
+        <div class="card bg-Orange arrow-right">
           <div class="card-body">
             <div>
               <h3 class="mb-2">{{ monthly_ticket_count?.incoming_assigned }}</h3>
-              <h6 class="card-title mb-0 subheader">Incoming</h6>
+              <h6 class="card-title mb-0 subheader">Weekly</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 grid-margin stretch-card status-block">
+        <div class="card bg-Darkorange arrow-right">
+          <div class="card-body">
+            <div>
+              <h3 class="mb-2">{{ monthly_ticket_count?.action_in_progress }}</h3>
+              <h6 class="card-title mb-0 subheader">Monthly</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 grid-margin stretch-card status-block">
+        <div class="card bg-Tyrian">
+          <div class="card-body">
+            <div>
+              <h3 class="mb-2">{{ monthly_ticket_count?.pending_client_feedback }}</h3>
+              <h6 class="card-title mb-0 heade subheader">Yearly</h6>
             </div>
           </div>
         </div>

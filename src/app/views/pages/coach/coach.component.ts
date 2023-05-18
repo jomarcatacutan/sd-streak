@@ -6,16 +6,18 @@ interface User {
   fullName: string;
   image: string;
   stages: any;
-  tickets?: Ticket[]; // This is the new addition
+  tickets?: Ticket[];
+  averageResponseTime?: number;
 }
 
 interface Ticket {
   name: string;
-  stage: string;
+  stageName: string;
   daysInStage: number;
-  createdBy: string;
-  dateOfLastEmail: string;
-  dateCreated: string;
+  firstEmailSentTimestamp: Date;
+  lastEmailUpdatedTimestamp: Date;
+  creationTimestamp: Date;
+  firstEmailResponseTime: number;
 }
 
 @Component({
@@ -31,18 +33,53 @@ export class CoachComponent implements OnInit {
     private http: HttpClient
   ) {}
 
-ngOnInit(): void {
-  this.http.get('https://sd-api-isd.clarkoutsourcing.com/getallusers').subscribe( (res: any) => {
-    this.users = Object.keys(res).map(key => ({
-      email: key,
-      fullName: res[key].fullName,
-      image: res[key].image,
-      stages: res[key].stages,
-    }));
-  })
-}
+  ngOnInit(): void {
+    /** Get all users including their assigned tickets */
+    this.http.get('https://sd-api-isd.clarkoutsourcing.com/getallusers').subscribe((res: any) => {
+      this.users = Object.keys(res).map(key => {
+        const tickets = res[key].data.map((ticket: any) => ({
+          name: ticket.name,
+          stageName: ticket.stageName,
+          daysInStage: ticket.daysInStage,
+          firstEmailSentTimestamp: new Date(ticket.firstEmailSentTimestamp),
+          lastEmailUpdatedTimestamp: new Date(ticket.lastEmailUpdatedTimestamp),
+          creationTimestamp: new Date(ticket.creationTimestamp),
+          firstEmailResponseTime: ticket.firstEmailResponseTime,
+        }));
 
+        /** Computation for average first response */
+        let totalResponseTime = 0;
+        tickets.forEach((ticket: Ticket) => totalResponseTime += ticket.firstEmailResponseTime);
+
+        return {
+          email: key,
+          fullName: res[key].fullName,
+          image: res[key].image,
+          stages: res[key].stages,
+          tickets: tickets,
+          averageResponseTime: tickets.length ? totalResponseTime / tickets.length : undefined,
+        }
+      });
+    });
+  }
+
+  /** Toggle Button to show tickets */
   toggleDetail(index: number): void {
     this.showDetailIndex = this.showDetailIndex === index ? null : index;
+  }
+
+  /** Color change depending on time for first response */
+  getResponseTimeColor(time: number | undefined): string {
+    if (time === undefined) {
+      return '';
+    } else if (time === 0) {
+      return 'white'
+    } else if (time > 0 && time <= 8) {
+      return 'green';
+    } else if (time > 8 && time <= 16) {
+      return 'yellow';
+    } else {
+      return 'red';
+    }
   }
 }
