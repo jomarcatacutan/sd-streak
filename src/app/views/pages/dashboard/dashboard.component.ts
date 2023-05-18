@@ -23,6 +23,7 @@ export class DashboardComponent implements OnInit {
   public monthlySalesChartOptions: any = {};
   public cloudStorageChartOptions: any = {};
   dtOptions: any;
+
   // colors and font variables for apex chart 
   obj = {
     primary        : "#6571ff",
@@ -47,6 +48,8 @@ export class DashboardComponent implements OnInit {
 
   /** NgbDatepicker */
   currentDate: NgbDateStruct;
+
+  /** Ticket Table */
   rows = [];
   loadingIndicator = true;
   reorderable = true;
@@ -79,17 +82,13 @@ export class DashboardComponent implements OnInit {
   expandedRow: any = null;
 
   toggleExpandRow(row: any) {
-    // If a row is already expanded and it's not the one we're trying to expand, collapse it
     if (this.expandedRow && this.expandedRow !== row) {
       this.table.rowDetail.toggleExpandRow(this.expandedRow);
       this.expandedRow = null;
     }
   
-    // Expand or collapse the clicked row
     this.table.rowDetail.toggleExpandRow(row);
-  
-    // If we just expanded the row, save it as the currently expanded row
-    // If we collapsed the row, clear the currently expanded row
+
     if (this.expandedRow === row) {
       this.expandedRow = null;
     } else {
@@ -118,15 +117,15 @@ export class DashboardComponent implements OnInit {
     });
     }
 
-    fetch(cb: any) {
-      const req = new XMLHttpRequest();
-      req.open('GET', `https://sd-api-isd.clarkoutsourcing.com/gettickets`);
-      req.onload = () => {
-        cb(JSON.parse(req.response));
-      };
-  
-      req.send();
-    }
+  fetch(cb: any) {
+    const req = new XMLHttpRequest();
+    req.open('GET', `https://sd-api-isd.clarkoutsourcing.com/gettickets`);
+    req.onload = () => {
+      cb(JSON.parse(req.response));
+    };
+
+    req.send();
+  }
     
   ngOnInit(): void {
     /** Get Ticket Count */
