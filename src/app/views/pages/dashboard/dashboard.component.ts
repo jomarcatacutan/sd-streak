@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { ChartConfiguration, ChartData, ChartType } from 'chart.js';
 import { NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClient } from '@angular/common/http';
@@ -75,6 +75,35 @@ export class DashboardComponent implements OnInit {
   /** All Ticket List */
   all_tickets: any;
 
+  /** Row detail is closed when another row is expanded */
+  expandedRow: any = null;
+
+  toggleExpandRow(row: any) {
+    // If a row is already expanded and it's not the one we're trying to expand, collapse it
+    if (this.expandedRow && this.expandedRow !== row) {
+      this.table.rowDetail.toggleExpandRow(this.expandedRow);
+      this.expandedRow = null;
+    }
+  
+    // Expand or collapse the clicked row
+    this.table.rowDetail.toggleExpandRow(row);
+  
+    // If we just expanded the row, save it as the currently expanded row
+    // If we collapsed the row, clear the currently expanded row
+    if (this.expandedRow === row) {
+      this.expandedRow = null;
+    } else {
+      this.expandedRow = row;
+    }
+  }
+
+  @HostListener('document:click', ['$event'])
+  clickout(event: MouseEvent) {
+    if (this.expandedRow && !(event.target as HTMLElement).closest('.datatable-row-wrapper')) {
+      this.toggleExpandRow(this.expandedRow);  // Close the currently expanded row
+    }
+  }
+
   @ViewChild(DatatableComponent, { static: false }) table: DatatableComponent;
 
   constructor(
@@ -98,11 +127,6 @@ export class DashboardComponent implements OnInit {
   
       req.send();
     }
-
-  toggleExpandRow(row: any) {
-    this.table.rowDetail.toggleExpandRow(row);
-    console.log(row);
-  }
     
   ngOnInit(): void {
     /** Get Ticket Count */
