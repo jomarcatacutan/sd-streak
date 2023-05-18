@@ -248,13 +248,25 @@
                 <tbody>
                   <tr>
                     <td *ngFor="let detailHeader of detailHeaders">
-                      {{ row[detailHeader.id] }}
+                      <!-- Check if the current column is 'freshness' -->
+                      <ng-container *ngIf="detailHeader.id === 'freshness'; else notFreshness">
+                        <!-- Display Wi-Fi signal-like bars for 'freshness' -->
+                        <div class="wifi-signal">
+                          <div class="bar" [ngClass]="{'active': row[detailHeader.id] > 0}"></div>
+                          <div class="bar" [ngClass]="{'active': row[detailHeader.id] > 0.2}"></div>
+                          <div class="bar" [ngClass]="{'active': row[detailHeader.id] > 0.4}"></div>
+                          <div class="bar" [ngClass]="{'active': row[detailHeader.id] > 0.6}"></div>
+                          <div class="bar" [ngClass]="{'active': row[detailHeader.id] > 0.8}"></div>
+                        </div>
+                      </ng-container>
+                      <!-- For other columns, display the value as is -->
+                      <ng-template #notFreshness>{{ row[detailHeader.id] }}</ng-template>
                     </td>
                   </tr>
                 </tbody>
               </table>
             </ng-template>
-          </ngx-datatable-row-detail>
+          </ngx-datatable-row-detail>          
 
           </ngx-datatable>
         </div>
