@@ -59,12 +59,12 @@ export class DashboardComponent implements OnInit {
     {"id": "creationDate", "label": "Date Created"},
   ];
   detailHeaders = [
-    {"id": "lastEmailReceivedTimestamp", "label": "Date of Last Email"},
-    {"id": "freshness", "label": "Freshness"},
-    {"id": "lastUpdatedTimestamp", "label": "Date Last Updated"},
     {"id": "firstEmailReceivedTimestamp", "label": "Date of First Received"},
-    {"id": "totalNumberOfEmails", "label": "Total Email Message"},
-    {"id": "lastEmailFrom", "label": "Last Email From"}
+    {"id": "lastEmailReceivedTimestamp", "label": "Date of Last Email"},
+    {"id": "lastUpdatedTimestamp", "label": "Date Last Updated"},
+    {"id": "freshness", "label": "Freshness"},
+    {"id": "lastEmailFrom", "label": "Last Email From"},
+    {"id": "totalNumberOfEmails", "label": "Total Email Message"}
   ];
 
   /** Ticket Count */
