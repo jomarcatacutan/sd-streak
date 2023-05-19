@@ -36,8 +36,9 @@ export class CoachComponent implements OnInit {
   ngOnInit(): void {
     /** Get all users including their assigned tickets */
     this.http.get('https://sd-api-isd.clarkoutsourcing.com/getallusers').subscribe((res: any) => {
-      this.users = Object.keys(res).map(key => {
-        const tickets = res[key].data.map((ticket: any) => ({
+      const userData = res.data;
+      this.users = Object.keys(userData).map(key => {
+        const tickets = userData[key].data.map((ticket: any) => ({
           name: ticket.name,
           stageName: ticket.stageName,
           daysInStage: ticket.daysInStage,
@@ -53,9 +54,9 @@ export class CoachComponent implements OnInit {
 
         return {
           email: key,
-          fullName: res[key].fullName,
-          image: res[key].image,
-          stages: res[key].stages,
+          fullName: userData[key].fullName,
+          image: userData[key].image,
+          stages: userData[key].stages,
           tickets: tickets,
           averageResponseTime: tickets.length ? totalResponseTime / tickets.length : undefined,
         }

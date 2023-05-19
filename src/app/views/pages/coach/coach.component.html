@@ -68,12 +68,12 @@
                                             </thead>
                                             <tbody>
                                                 <tr *ngFor="let ticket of user.tickets">
-                                                    <td>{{ticket.name}}</td>
+                                                    <td [title]="ticket.name">{{ticket.name | slice:0:50 }} ...</td>
                                                     <td>{{ticket.stageName}}</td>
                                                     <td>{{ticket.daysInStage}}</td>
-                                                    <td>{{ticket.creationTimestamp | date}}</td>
-                                                    <td>{{ticket.firstEmailSentTimestamp | date}}</td>
-                                                    <td>{{ticket.lastEmailUpdatedTimestamp | date}}</td>
+                                                    <td>{{ticket.creationTimestamp | date:'MMMM d, y, h:mm a'}}</td>
+                                                    <td>{{ticket.firstEmailSentTimestamp | date:'MMMM d, y, h:mm a'}}</td>
+                                                    <td>{{ticket.lastEmailUpdatedTimestamp | date:'MMMM d, y, h:mm a'}}</td>
                                                     <td [ngClass]="ticket.firstEmailResponseTime !== undefined ? getResponseTimeColor(ticket.firstEmailResponseTime) : ''">{{ ticket.firstEmailResponseTime }}</td>                                                    
                                                   </tr>
                                             </tbody>
