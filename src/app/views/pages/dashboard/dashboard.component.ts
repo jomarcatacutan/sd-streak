@@ -57,7 +57,7 @@ export class DashboardComponent implements OnInit {
   headers = [
     {"id": "name", "label": "Ticket Name"},
     {"id": "stage", "label": "Stage"},
-    {"id": "displayName", "label": "Assigned"},
+    {"id": "assignees", "label": "Assigned"},
     {"id": "lastEntryToStageDays", "label": "Days in Stage"},
     {"id": "creationDate", "label": "Date Created"},
   ];
