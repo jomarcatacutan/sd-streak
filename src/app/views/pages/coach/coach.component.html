@@ -68,7 +68,7 @@
                                             </thead>
                                             <tbody>
                                                 <tr *ngFor="let ticket of user.tickets">
-                                                    <td [title]="ticket.name">{{ticket.name | slice:0:50 }} ...</td>
+                                                    <td [title]="ticket.name">{{ticket.name | slice:0:40 }} ...</td>
                                                     <td>{{ticket.stageName}}</td>
                                                     <td>{{ticket.daysInStage}}</td>
                                                     <td>{{ticket.creationTimestamp | date:'MMMM d, y, h:mm a'}}</td>
