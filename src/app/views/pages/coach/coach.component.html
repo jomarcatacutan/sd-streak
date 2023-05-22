@@ -71,9 +71,9 @@
                                                     <td [title]="ticket.name">{{ticket.name | slice:0:40 }} ...</td>
                                                     <td>{{ticket.stageName}}</td>
                                                     <td>{{ticket.daysInStage}}</td>
-                                                    <td>{{ticket.creationTimestamp | date:'MMMM d, y, h:mm a'}}</td>
-                                                    <td>{{ticket.firstEmailSentTimestamp | date:'MMMM d, y, h:mm a'}}</td>
-                                                    <td>{{ticket.lastEmailUpdatedTimestamp | date:'MMMM d, y, h:mm a'}}</td>
+                                                    <td>{{ticket.creationTimestamp !== null && ticket.creationTimestamp !== undefined ? (ticket.creationTimestamp | date:'MMMM d, y, h:mm a') : 'N/A'}}</td>
+                                                    <td>{{ticket.firstEmailSentTimestamp !== null && ticket.firstEmailSentTimestamp !== undefined ? (ticket.firstEmailSentTimestamp | date:'MMMM d, y, h:mm a') : 'N/A'}}</td>
+                                                    <td>{{ticket.lastEmailUpdatedTimestamp !== null && ticket.lastEmailUpdatedTimestamp !== undefined ? (ticket.lastEmailUpdatedTimestamp | date:'MMMM d, y, h:mm a') : 'N/A'}}</td>                
                                                     <td [ngClass]="ticket.firstEmailResponseTime !== undefined ? getResponseTimeColor(ticket.firstEmailResponseTime) : ''">{{ ticket.firstEmailResponseTime }}</td>                                                    
                                                   </tr>
                                             </tbody>

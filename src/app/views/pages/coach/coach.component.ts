@@ -42,9 +42,9 @@ export class CoachComponent implements OnInit {
           name: ticket.name,
           stageName: ticket.stageName,
           daysInStage: ticket.daysInStage,
-          firstEmailSentTimestamp: new Date(ticket.firstEmailSentTimestamp),
-          lastEmailUpdatedTimestamp: new Date(ticket.lastEmailUpdatedTimestamp),
-          creationTimestamp: new Date(ticket.creationTimestamp),
+          firstEmailSentTimestamp: ticket.firstEmailSentTimestamp ? new Date(ticket.firstEmailSentTimestamp) : null,
+          lastEmailUpdatedTimestamp: ticket.lastEmailUpdatedTimestamp ? new Date(ticket.lastEmailUpdatedTimestamp) : null,
+          creationTimestamp: ticket.creationTimestamp ? new Date(ticket.creationTimestamp) : null,
           firstEmailResponseTime: ticket.firstEmailResponseTime,
         }));
 
