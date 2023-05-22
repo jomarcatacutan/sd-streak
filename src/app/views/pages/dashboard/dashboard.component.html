@@ -308,7 +308,10 @@
                         </div>
                       </ng-container>
                       <!-- For other columns, display the value as is -->
-                      <ng-template #notFreshness>{{ row[detailHeader.id] }}</ng-template>
+                      <ng-template #notFreshness>
+                        <span *ngIf="row[detailHeader.id] === null || row[detailHeader.id] === undefined; else showValue">N/A</span>
+                        <ng-template #showValue>{{ row[detailHeader.id] }}</ng-template>
+                      </ng-template>                      
                     </td>
                   </tr>
                 </tbody>
