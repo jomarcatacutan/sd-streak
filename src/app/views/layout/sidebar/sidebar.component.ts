@@ -57,6 +57,8 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     new MetisMenu(this.sidebarMenu.nativeElement);
     
     this._activateMenuDropdown();
+
+    this.document.body.classList.add('sidebar-folded');
   }
 
   /**
