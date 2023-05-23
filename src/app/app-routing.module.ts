@@ -1,16 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { BaseComponent } from './views/layout/base/base.component';
-import { AuthGuard } from './core/guard/auth.guard';
 import { ErrorPageComponent } from './views/pages/error-page/error-page.component';
 
-
 const routes: Routes = [
-  { path:'auth', loadChildren: () => import('./views/pages/auth/auth.module').then(m => m.AuthModule) },
   {
     path: '',
     component: BaseComponent,
-    canActivate: [AuthGuard],
     children: [
       {
         path: 'dashboard',
@@ -56,8 +52,7 @@ const routes: Routes = [
         path: 'team-members',
         loadChildren: () => import('./views/pages/coach/coach.module').then(m => m.CoachModule)
       },
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' }, 
-      // { path: '**', redirectTo: 'dashboard', pathMatch: 'full' }
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     ]
   },
   { 
@@ -80,4 +75,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'top' })],
   exports: [RouterModule]
 })
+
 export class AppRoutingModule { }
