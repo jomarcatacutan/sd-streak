@@ -25,8 +25,8 @@
                     <th class="width-status bg-Tyrian">Pending Client Feedback</th>
                     <th class="width-status bg-Darkblue">Completed</th>
                     <th class="width-status bg-DarkSun">On Hold</th>
-                    <th class="width-status">Average Resolution Time</th>
-                    <th class="width-status">Average Time for First Response</th>
+                    <th class="width-status">Average Resolution Time (in hours)</th>
+                    <th class="width-status">Average Time for First Response (in hours)</th>
                     <th class="width-dropdown">View Tickets</th>
                 </tr>
                 </thead>
@@ -39,7 +39,7 @@
                         <td class="ticket-count">{{user.stages['Pending Client Feedback'] ?? 0}}</td>
                         <td class="ticket-count">{{user.stages['Completed'] ?? 0}}</td>
                         <td class="ticket-count">{{user.stages['On Hold'] ?? 0}}</td>
-                        <td class="ticket-count">5</td>
+                        <td class="ticket-count">{{user.averageIncomingToCompletedHr}}</td>
                         <td [ngClass]="getResponseTimeColor(user.averageResponseTime)">
                             {{ user.averageResponseTime | number:'1.2-2' }}
                         </td>                                               

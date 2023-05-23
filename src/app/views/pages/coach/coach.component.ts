@@ -6,8 +6,9 @@ interface User {
   fullName: string;
   image: string;
   stages: any;
+  averageIncomingToCompletedHr: number;
   tickets?: Ticket[];
-  averageResponseTime?: number;
+  averageResponseTime: any;
 }
 
 interface Ticket {
@@ -48,17 +49,14 @@ export class CoachComponent implements OnInit {
           firstEmailResponseTime: ticket.firstEmailResponseTime,
         }));
 
-        /** Computation for average first response */
-        let totalResponseTime = 0;
-        tickets.forEach((ticket: Ticket) => totalResponseTime += ticket.firstEmailResponseTime);
-
         return {
           email: key,
           fullName: userData[key].fullName,
           image: userData[key].image,
           stages: userData[key].stages,
+          averageIncomingToCompletedHr: userData[key].averageIncomingToCompletedHr,
           tickets: tickets,
-          averageResponseTime: tickets.length ? totalResponseTime / tickets.length : undefined,
+          averageResponseTime: userData[key].averageResponseTime,
         }
       });
     });
