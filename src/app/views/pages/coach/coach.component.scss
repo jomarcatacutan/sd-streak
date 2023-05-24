@@ -106,3 +106,44 @@ $Darkblue: #104c5c;
 .orange {
     background-color: orange;
 }
+
+#color-legend {
+    margin-bottom: 20px;
+}
+
+.legend {
+    display: flex;
+    margin-top: 10px;
+}
+
+#rectangle1 {
+    width: 60px;
+    height: auto;
+    background: rgb(100, 204, 100);
+    margin-right: 5px;
+}
+
+#rectangle2 {
+    width: 60px;
+    height: auto;
+    background: rgb(235, 235, 122);
+    margin-right: 5px;
+}
+
+#rectangle3 {
+    width: 60px;
+    height: auto;
+    background: orange;
+    margin-right: 5px;
+}
+
+#rectangle4 {
+    width: 60px;
+    height: auto;
+    background: rgb(219, 80, 80);
+    margin-right: 5px;
+}
+
+.legend-title {
+    margin-right: 30px;
+}

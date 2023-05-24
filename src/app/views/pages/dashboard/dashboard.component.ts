@@ -50,7 +50,8 @@ export class DashboardComponent implements OnInit {
   currentDate: NgbDateStruct;
 
   /** Ticket Table */
-  rows = [];
+  rows: any[] = [];
+  temp: any[] = [...this.rows];
   loadingIndicator = true;
   reorderable = true;
   ColumnMode = ColumnMode;
@@ -58,7 +59,7 @@ export class DashboardComponent implements OnInit {
     {"id": "name", "label": "Ticket Name"},
     {"id": "stage", "label": "Stage"},
     {"id": "assignees", "label": "Assigned"},
-    {"id": "lastEntryToStageDays", "label": "Days in Stage"},
+    {"id": "daysInStage", "label": "Days in Stage"},
     {"id": "creationDate", "label": "Date Created"},
   ];
   detailHeaders = [
@@ -69,6 +70,50 @@ export class DashboardComponent implements OnInit {
     {"id": "lastEmailFrom", "label": "Last Email From"},
     {"id": "totalNumberOfEmails", "label": "Total Email Message"}
   ];
+
+  /** Search Functionality */
+  updateFilter(event: any) {
+    const val = event.target.value.toLowerCase();
+  
+    // If the search box is empty, reset rows to original data
+    if (!val) {
+      this.rows = [...this.temp];
+      this.table.offset = 0;
+      return;
+    }
+  
+    // filter our data
+    const temp = this.temp.filter((row: any) => {
+      return Object.keys(row).some((key: any) => {
+        let cellValue = row[key];
+        if (cellValue === null || cellValue === undefined) {
+          return false;
+        }
+        if (typeof cellValue === 'object' && cellValue !== null) {
+          // Handle date values separately
+          if (cellValue instanceof Date) {
+            const dateString = cellValue.toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            }).toLowerCase();
+            return dateString.includes(val);
+          }
+          return false;
+        }
+        let cellValueString = String(cellValue).toLowerCase();
+  
+        // Split search query into terms and check if each term is contained within the cell value
+        const searchTerms = val.split(' ');
+        return searchTerms.every((term: string) => cellValueString.includes(term));
+      });
+    });
+  
+    // update the rows
+    this.rows = temp;
+    // Whenever the filter changes, always go back to the first page
+    this.table.offset = 0;
+  }    
 
   /** Ticket Count */
   current_ticket_count: any;
@@ -140,6 +185,8 @@ export class DashboardComponent implements OnInit {
         }
       });
       cb(data);
+      // Set temp data here after data fetch
+      this.temp = [...data];
     };
     
     req.send();
@@ -178,35 +225,35 @@ export class DashboardComponent implements OnInit {
     
   }
 
-/*** Pie chart */
-public pieChartOptions: ChartConfiguration['options'] = {
-  aspectRatio: 2,
-  plugins: {
-    legend: { 
-      display: true,
-      labels: {
-        color: this.obj.bodyColor,
-        font: {
-          size: 13,
-          family: this.obj.fontFamily
+  /*** Pie chart */
+  public pieChartOptions: ChartConfiguration['options'] = {
+    aspectRatio: 2,
+    plugins: {
+      legend: { 
+        display: true,
+        labels: {
+          color: this.obj.bodyColor,
+          font: {
+            size: 13,
+            family: this.obj.fontFamily
+          }
         }
-      }
+      },
     },
-  },
-};
- public pieChartLabels: string[] = ["Incoming", "Action In Progres", "Pending Client Feedback", "Completed", "On Hold"];
- public pieChartData: ChartData<'doughnut'> = {
-   labels: this.pieChartLabels,
-   datasets: [{
-    label: "Population (millions)",
-    backgroundColor: [this.obj.Orange, this.obj.Darkorange, this.obj.Tyrian, this.obj.Darkblue, this.obj.DarkSun],
-    hoverBackgroundColor: [this.obj.Orange, this.obj.Darkorange, this.obj.Tyrian, this.obj.Darkblue, this.obj.DarkSun],
-    borderColor: this.obj.cardBg,
-    hoverBorderColor: [this.obj.Orange, this.obj.Darkorange, this.obj.Tyrian, this.obj.Darkblue, this.obj.DarkSun],
-    data: [20,10,40,10,5]
-   }]
- };
- public pieChartType: ChartType = 'pie';
+  };
+  public pieChartLabels: string[] = ["Incoming", "Action In Progress", "Pending Client Feedback", "Completed", "On Hold"];
+  public pieChartData: ChartData<'doughnut'> = {
+    labels: this.pieChartLabels,
+    datasets: [{
+      label: "Population (millions)",
+      backgroundColor: [this.obj.Orange, this.obj.Darkorange, this.obj.Tyrian, this.obj.Darkblue, this.obj.DarkSun],
+      hoverBackgroundColor: [this.obj.Orange, this.obj.Darkorange, this.obj.Tyrian, this.obj.Darkblue, this.obj.DarkSun],
+      borderColor: this.obj.cardBg,
+      hoverBorderColor: [this.obj.Orange, this.obj.Darkorange, this.obj.Tyrian, this.obj.Darkblue, this.obj.DarkSun],
+      data: [20,10,40,10,5]
+    }]
+  };
+  public pieChartType: ChartType = 'pie';
 
 
   /**

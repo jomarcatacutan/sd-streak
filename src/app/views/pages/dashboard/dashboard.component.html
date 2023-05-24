@@ -58,8 +58,8 @@
         <div class="card bg-DarkSun">
           <div class="card-body">
             <div>
-              <h3 class="mb-2">{{ current_ticket_count?.on_hold }}</h3>
-              <h6 class="card-title mb-0 subheader">On Hold</h6>
+              <h3 class="mb-2">{{ current_ticket_count?.escalated }}</h3>
+              <h6 class="card-title mb-0 subheader">Escalated</h6>
             </div>
           </div>
         </div>
@@ -116,8 +116,8 @@
         <div class="card bg-DarkSun">
           <div class="card-body">
             <div>
-              <h3 class="mb-2">{{ weekly_ticket_count?.on_hold }}</h3>
-              <h6 class="card-title mb-0 subheader">On Hold</h6>
+              <h3 class="mb-2">{{ weekly_ticket_count?.escalated }}</h3>
+              <h6 class="card-title mb-0 subheader">Escalated</h6>
             </div>
           </div>
         </div>
@@ -174,8 +174,8 @@
         <div class="card bg-DarkSun">
           <div class="card-body">
             <div>
-              <h3 class="mb-2">{{ monthly_ticket_count?.on_hold }}</h3>
-              <h6 class="card-title mb-0 subheader">On Hold</h6>
+              <h3 class="mb-2">{{ monthly_ticket_count?.escalated }}</h3>
+              <h6 class="card-title mb-0 subheader">Escalated</h6>
             </div>
           </div>
         </div>
@@ -226,18 +226,11 @@
   <div class="col-12 col-xl-12 stretch-card grid-margin">
     <div class="card">
       <div class="card-body">
-        <div class="card-header d-flex justify-content-between p-0">
-          <h6 class="card-title">SERVICE DELIVERY PIPELINE</h6>
-          <div ngbDropdown class="mb-2">
-            <button ngbDropdownToggle class="btn p-0 no-dropdown-toggle-icon" type="button" id="dropdownMenuButton7">
-              <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal" appFeatherIcon></i>
-            </button>
-            <div ngbDropdownMenu aria-labelledby="dropdownMenuButton7">
-              <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="eye" appFeatherIcon class="icon-sm me-2"></i> <span class="">View</span></a>
-              <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="edit-2" appFeatherIcon class="icon-sm me-2"></i> <span class="">Edit</span></a>
-              <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="trash" appFeatherIcon class="icon-sm me-2"></i> <span class="">Delete</span></a>
-              <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="printer" appFeatherIcon class="icon-sm me-2"></i> <span class="">Print</span></a>
-              <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="download" appFeatherIcon class="icon-sm me-2"></i> <span class="">Download</span></a>
+        <div id="ticket-table-header" class="card-header d-flex justify-content-between p-0 align-items-center">
+          <h6 id="ticket-table-title" class="card-title">SERVICE DELIVERY PIPELINE</h6>
+          <div class="d-flex align-items-center">
+            <div class="table-search">
+              <input type="text" class="form-control search-input" (keyup)="updateFilter($event)" placeholder="Search...">
             </div>
           </div>
         </div>
@@ -253,13 +246,13 @@
           >
 
           <ngx-datatable-column 
-          *ngFor="let col of headers" 
-          [name]="col.id" 
-          [sortable]="true" 
-          [prop]="col.id === 'creationDate' ? 'creationDate' : col.id"
-          [canAutoResize]="true" 
-          [draggable]="true" 
-          [resizeable]="true">
+            *ngFor="let col of headers" 
+            [name]="col.id" 
+            [sortable]="true" 
+            [prop]="col.id === 'creationDate' ? 'creationDate' : col.id"
+            [canAutoResize]="true" 
+            [draggable]="true" 
+            [resizeable]="true">
             <ng-template ngx-datatable-cell-template let-row="row" let-value="value">
               <ng-container *ngIf="col.id !== 'assignees'; else assigneesBlock">
                 <span>{{ col.id === 'creationDate' ? row.formattedCreationDate : value }}</span>
@@ -274,7 +267,7 @@
             <ng-template ngx-datatable-header-template let-sort="sortFn">
               <span>{{ col.label }}</span>
             </ng-template>
-        </ngx-datatable-column>        
+          </ngx-datatable-column>        
 
           <!-- Add a new column for the arrow -->
           <ngx-datatable-column [width]="50" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">

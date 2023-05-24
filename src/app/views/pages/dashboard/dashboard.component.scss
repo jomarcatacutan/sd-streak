@@ -187,6 +187,16 @@ $Darkblue: #104c5c;
     background: #05a34a; /* adjust the color as needed */
 }
 
+#ticket-table-title {
+    margin: 0;
+}
+
+#ticket-table-header {
+    margin-bottom: 20px;
+    border-bottom: 0;
+    background-color: #fff;
+}
+
 @media only screen and (min-width: 768px) {
     .status-report {
         .status-block {

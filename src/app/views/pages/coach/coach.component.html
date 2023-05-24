@@ -24,7 +24,7 @@
                     <th class="width-status bg-Darkorange">Action in Progress</th>
                     <th class="width-status bg-Tyrian">Pending Client Feedback</th>
                     <th class="width-status bg-Darkblue">Completed</th>
-                    <th class="width-status bg-DarkSun">On Hold</th>
+                    <th class="width-status bg-DarkSun">Escalated</th>
                     <th class="width-status">Average Resolution Time (in hours)</th>
                     <th class="width-status">Average Time for First Response (in hours)</th>
                     <th class="width-dropdown">View Tickets</th>
@@ -86,9 +86,23 @@
                 </ng-container>
                 </tbody>
             </table>
-            </div>
         </div>
         </div> 
     </div>
 </div>
+
+<div id="color-legend">
+    <div class="legend">
+        <div id="rectangle1"></div>    
+        <div class="legend-title">Less than 8 hours</div>   
+        <div id="rectangle2"></div>    
+        <div class="legend-title">Between 8 to 16 hours</div>   
+        <div id="rectangle3"></div>    
+        <div class="legend-title">Between 16 to 24 hours</div>   
+        <div id="rectangle4"></div>    
+        <div class="legend-title">More than 24 hours</div>   
+    </div>
+</div>
+
+<small>Last Updated: {{ lastUpdate | date: 'medium'}}</small>
     

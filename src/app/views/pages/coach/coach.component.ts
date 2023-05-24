@@ -29,37 +29,21 @@ interface Ticket {
 export class CoachComponent implements OnInit {
   users: User[] = [];
   showDetailIndex: number | null = null;
-
+  clearInterval:any;
+  lastUpdate: Date;
   constructor(
     private http: HttpClient
-  ) {}
+  ) {
+    this.fetch();
+  }
 
   ngOnInit(): void {
-    /** Get all users including their assigned tickets */
-    this.http.get('https://sd-api-isd.clarkoutsourcing.com/getallusers').subscribe((res: any) => {
-      const userData = res.data;
-      this.users = Object.keys(userData).map(key => {
-        const tickets = userData[key].data.map((ticket: any) => ({
-          name: ticket.name,
-          stageName: ticket.stageName,
-          daysInStage: ticket.daysInStage,
-          firstEmailSentTimestamp: ticket.firstEmailSentTimestamp ? new Date(ticket.firstEmailSentTimestamp) : null,
-          lastEmailUpdatedTimestamp: ticket.lastEmailUpdatedTimestamp ? new Date(ticket.lastEmailUpdatedTimestamp) : null,
-          creationTimestamp: ticket.creationTimestamp ? new Date(ticket.creationTimestamp) : null,
-          firstEmailResponseTime: ticket.firstEmailResponseTime,
-        }));
+  }
 
-        return {
-          email: key,
-          fullName: userData[key].fullName,
-          image: userData[key].image,
-          stages: userData[key].stages,
-          averageIncomingToCompletedHr: userData[key].averageIncomingToCompletedHr,
-          tickets: tickets,
-          averageResponseTime: userData[key].averageResponseTime,
-        }
-      });
-    });
+  ngAfterViewInit() {
+    this.clearInterval = setInterval(() => {
+      this.fetch();
+    }, 300000);
   }
 
   /** Toggle Button to show tickets */
@@ -81,6 +65,40 @@ export class CoachComponent implements OnInit {
       return 'orange';
     } else {
       return 'red';
+    }
+  }
+
+  fetch() {
+    /** Get all users including their assigned tickets */
+    this.http.get('https://sd-api-isd.clarkoutsourcing.com/getallusers').subscribe((res: any) => {
+      const userData = res.data;
+      this.users = Object.keys(userData).map(key => {
+        const tickets = userData[key].data.map((ticket: any) => ({
+          name: ticket.name,
+          stageName: ticket.stageName,
+          daysInStage: ticket.daysInStage,
+          firstEmailSentTimestamp: ticket.firstEmailSentTimestamp ? new Date(ticket.firstEmailSentTimestamp) : null,
+          lastEmailUpdatedTimestamp: ticket.lastEmailUpdatedTimestamp ? new Date(ticket.lastEmailUpdatedTimestamp) : null,
+          creationTimestamp: ticket.creationTimestamp ? new Date(ticket.creationTimestamp) : null,
+          firstEmailResponseTime: ticket.firstEmailResponseTime,
+        }));
+        this.lastUpdate = new Date();
+        return {
+          email: key,
+          fullName: userData[key].fullName,
+          image: userData[key].image,
+          stages: userData[key].stages,
+          averageIncomingToCompletedHr: userData[key].averageIncomingToCompletedHr,
+          tickets: tickets,
+          averageResponseTime: userData[key].averageResponseTime,
+        }
+      });
+    });
+  }
+
+  ngOnDestroy() {
+    if (this.clearInterval) {
+      clearInterval(this.clearInterval);
     }
   }
 }
