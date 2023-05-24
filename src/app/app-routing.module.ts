@@ -53,7 +53,7 @@ const routes: Routes = [
         loadChildren: () => import('./views/pages/general/general.module').then(m => m.GeneralModule)
       },
       {
-        path: 'team-members',
+        path: 'advisors',
         loadChildren: () => import('./views/pages/coach/coach.module').then(m => m.CoachModule)
       },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' }, 
