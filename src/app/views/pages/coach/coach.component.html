@@ -10,6 +10,50 @@
     </div>
 </div>
 
+<div class="row" id="coach-status">
+    <ng-container *ngFor="let user of users; let i = index">
+    <div class="col-4 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <div class="coach-profile d-flex align-items-center">
+                    <img [src]="user.image">
+                    <label>{{user.fullName}}</label>
+                </div>
+                <div class="main-report row">
+                    <div class="col-3 d-flex align-items-center justify-content-end p-0 total"><h2>{{user.averageIncomingToCompletedHr}}</h2></div>
+                    <div class="col-3 d-flex align-items-center p-0"><h3>Average <br> Resolution Time</h3></div>
+                    <div class="col-3 d-flex align-items-center justify-content-end p-0 total" ><h2 [ngClass]="getResponseTimeColor(user.averageResponseTime)">{{ user.averageResponseTime | number:'1.2-2' }}</h2></div>
+                    <div class="col-3 d-flex align-items-center p-0"><h3>Average Time <br>or First Reply</h3></div>
+                </div>
+                <div class="sub-report row">
+                    <div class="col-2 d-flex align-content-start p-0 block">
+                        <h2>{{user.stages['INCOMING (ASSIGNED)'] ?? 0}}</h2>
+                        <label class="text-center" >Incoming</label>
+                    </div>
+                    <div class="col-3 d-flex align-content-start p-0 block">
+                        <h2>{{user.stages['Action In Progress'] ?? 0}}</h2>
+                        <label class="text-center" >Action in Progress</label>
+                    </div>
+                    <div class="col-3 d-flex align-content-start p-0 block">
+                        <h2>{{user.stages['Pending Client Feedback'] ?? 0}}</h2>
+                        <label class="text-center">Pending Client Feedback</label>
+                    </div>
+                    <div class="col-2 d-flex align-content-start p-0 block">
+                        <h2>{{user.stages['Completed'] ?? 0}}</h2>
+                        <label class="text-center" >Completed</label>
+                    </div>
+                    <div class="col-2 d-flex align-content-start p-0 block">
+                        <h2>{{user.stages['On Hold'] ?? 0}}</h2>
+                        <label class="text-center" >Escalated</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </ng-container>
+    <small>Last Updated: {{ lastUpdate | date: 'medium'}}</small>
+</div>
+
 <div class="row">
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
