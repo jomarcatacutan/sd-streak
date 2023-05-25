@@ -27,6 +27,7 @@ interface Ticket {
   styleUrls: ['./coach.component.scss']
 })
 export class CoachComponent implements OnInit {
+  currentIntervalLabel: string = '5 minutes';
   users: User[] = [];
   showDetailIndex: number | null = null;
   clearInterval:any;
@@ -41,10 +42,44 @@ export class CoachComponent implements OnInit {
   }
 
   ngAfterViewInit() {
+    this.setInterval(300000);
+  }
+
+  setInterval(interval: number) {
+    // Clear existing interval
+    if (this.clearInterval) {
+      clearInterval(this.clearInterval);
+    }
+  
+    // Set new interval
     this.clearInterval = setInterval(() => {
       this.fetch();
-    }, 300000);
-  }
+    }, interval);
+  
+    // Update the interval label
+    switch (interval) {
+      case 60000:
+        this.currentIntervalLabel = '1 minute';
+        break;
+      case 300000:
+        this.currentIntervalLabel = '5 minutes';
+        break;
+      case 600000:
+        this.currentIntervalLabel = '10 minutes';
+        break;
+      case 900000:
+        this.currentIntervalLabel = '15 minutes';
+        break;
+      case 1800000:
+        this.currentIntervalLabel = '30 minutes';
+        break;
+      case 3600000:
+        this.currentIntervalLabel = '1 hour';
+        break;
+      default:
+        this.currentIntervalLabel = '5 minutes';
+    }
+  }  
 
   /** Toggle Button to show tickets */
   toggleDetail(index: number): void {
