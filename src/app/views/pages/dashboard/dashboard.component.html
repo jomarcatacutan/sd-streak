@@ -1,7 +1,16 @@
-<div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
-  <h4 class="mb-3 mb-md-0 title-page">Dashboard</h4>
-  <div class="d-flex align-items-center flex-wrap">
-    <div ngbDropdown class="dropdown ml-3">
+<div class="d-flex justify-content-between align-items-center flex-wrap grid-margin row">
+  <div class="col-6">
+    <h4 class="mb-3 mb-md-0 title-page">Dashboard</h4>
+    <nav class="page-breadcrumb m-0">
+      <ol class="breadcrumb m-0">
+        <li class="breadcrumb-item active">Main</li>
+        <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+      </ol>
+    </nav>
+  </div>
+  <div class="col-6 d-flex justify-content-end">
+    <div ngbDropdown class="dropdown ml-3 d-flex align-items-center">
+      <p style="margin-right: 20px; margin-left: 20px;">Last Updated: {{ lastUpdate | date: 'medium'}}</p>
       <button class="btn btn-primary" id="intervalDropdown" ngbDropdownToggle>
         <i class="feather icon-clock"></i> Interval: {{currentIntervalLabel}}
       </button>
@@ -13,14 +22,7 @@
         <button class="dropdown-item" (click)="setInterval(1800000)">30 minutes</button>
         <button class="dropdown-item" (click)="setInterval(3600000)">1 hour</button>
       </div>      
-    </div>    
-    <p style="margin-right: 20px; margin-left: 20px;">Last Updated: {{ lastUpdate | date: 'medium'}}</p>
-    <nav class="page-breadcrumb m-0">
-      <ol class="breadcrumb m-0">
-        <li class="breadcrumb-item active">Service Delivery</li>
-        <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
-      </ol>
-    </nav>
+    </div>  
   </div>
 </div>
 
