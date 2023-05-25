@@ -187,7 +187,7 @@ export class DashboardComponent implements OnInit {
           this.loadingIndicator = false;
         }, 1500);
       });
-    }, 30000);
+    }, 300000);
   }
   
   ngOnDestroy() {
