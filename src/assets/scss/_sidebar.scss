@@ -281,7 +281,7 @@
     }
   }
   .sidebar-body {
-    max-height: calc(100% - #{$navbar-height});
+    // max-height: calc(100% - #{$navbar-height});
     position: relative;
     border-right: 1px solid $border-color;
     height: 100%;
