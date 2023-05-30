@@ -99,7 +99,7 @@
                         <td class="ticket-count">{{user.stages['Completed'] ?? 0}}</td>
                         <td class="ticket-count">{{user.stages['On Hold'] ?? 0}}</td>
                         <td class="ticket-count">{{user.averageIncomingToCompletedHr}}</td>
-                        <td [ngClass]="getResponseTimeColor(user.averageResponseTime)">
+                        <td class="aveResponseTime" [ngClass]="getResponseTimeColor(user.averageResponseTime)">
                             {{ user.averageResponseTime | number:'1.2-2' }}
                         </td>                                               
                         <td class="ticket-count">
